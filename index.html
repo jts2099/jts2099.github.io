@@ -39,14 +39,67 @@ body {
   line-height: 1.85;
   overflow-x: hidden;
 }
+/* Texture baked at load via JS into body background — iOS safe */
+/* Cascade leaf shadows — CSS only, no fixed canvas needed */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(
+      108deg,
+      transparent 0px,
+      transparent 38px,
+      rgba(28,20,12,0.032) 38px,
+      rgba(28,20,12,0.032) 52px,
+      transparent 52px,
+      transparent 90px,
+      rgba(28,20,12,0.022) 90px,
+      rgba(28,20,12,0.022) 98px,
+      transparent 98px,
+      transparent 145px,
+      rgba(28,20,12,0.038) 145px,
+      rgba(28,20,12,0.038) 164px,
+      transparent 164px,
+      transparent 220px,
+      rgba(28,20,12,0.018) 220px,
+      rgba(28,20,12,0.018) 226px
+    );
+  animation: cascadeShift 28s linear infinite;
+}
 body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
   pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: multiply;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(
+      112deg,
+      transparent 0px,
+      transparent 55px,
+      rgba(18,28,36,0.025) 55px,
+      rgba(18,28,36,0.025) 72px,
+      transparent 72px,
+      transparent 130px,
+      rgba(28,20,12,0.028) 130px,
+      rgba(28,20,12,0.028) 149px,
+      transparent 149px,
+      transparent 200px,
+      rgba(18,28,36,0.020) 200px,
+      rgba(18,28,36,0.020) 210px
+    );
+  animation: cascadeShift2 38s linear infinite;
+}
+@keyframes cascadeShift {
+  from { background-position: 0 0; }
+  to   { background-position: 600px 800px; }
+}
+@keyframes cascadeShift2 {
+  from { background-position: 0 0; }
+  to   { background-position: -500px 700px; }
 }
 /* NAV */
 nav {
@@ -236,7 +289,6 @@ footer .whorl-f { position:absolute; inset:-60%; background:conic-gradient(from 
 </style>
 </head>
 <body>
-<canvas id="persona-texture" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200;opacity:0.82;mix-blend-mode:multiply;"></canvas>
 
 <nav>
   <a href="#hero" class="nav-logo">Persona</a>
@@ -569,181 +621,126 @@ footer .whorl-f { position:absolute; inset:-60%; background:conic-gradient(from 
   <p class="footer-end">Bespoke colour &nbsp;·&nbsp; 30+ years of craft &nbsp;·&nbsp; Mendocino Coast</p>
 </footer>
 
-<!-- CANVAS TEXTURE LAYERS -->
-
 <script>
-// ── CONCRETE + GRIT + KOMOREBI CASCADE CANVAS EFFECT ─────────────────
-// Ported from original Persona site, retuned for komorebi palette
 (function() {
-  // Layer 1: warm concrete noise + fingerprint shadow pools
-  const tex = document.getElementById('persona-texture');
-  const ctx = tex.getContext('2d');
+  // ── BAKED TEXTURE: offscreen canvas → data URL → body background-image
+  // This approach works reliably on iOS Safari — no fixed canvas, no blend mode issues.
+  // We paint once at load and tile it as a CSS background.
 
-  // Layer 2: fine grit overlay
-  const grit = document.createElement('canvas');
-  grit.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:201;opacity:0.28;mix-blend-mode:overlay;';
-  document.body.appendChild(grit);
-  const gctx = grit.getContext('2d');
+  var SIZE = 320; // tile size — small enough to be fast, large enough to look random
+  var off = document.createElement('canvas');
+  off.width = SIZE; off.height = SIZE;
+  var ctx = off.getContext('2d');
 
-  // Layer 3: komorebi — drifting leaf-shadow cascade
-  const komo = document.createElement('canvas');
-  komo.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:199;opacity:1;mix-blend-mode:multiply;';
-  document.body.appendChild(komo);
-  const kctx = komo.getContext('2d');
+  // 1. Base radial vignette — warm centre to deeper edge
+  var base = ctx.createRadialGradient(SIZE*0.44, SIZE*0.40, 0, SIZE*0.5, SIZE*0.5, SIZE*0.75);
+  base.addColorStop(0,   'rgba(237,229,216,0.0)');
+  base.addColorStop(0.5, 'rgba(200,188,168,0.10)');
+  base.addColorStop(1,   'rgba(140,125,100,0.32)');
+  ctx.fillStyle = base;
+  ctx.fillRect(0, 0, SIZE, SIZE);
 
-  function resize() {
-    const w = window.innerWidth, h = window.innerHeight;
-    tex.width = w;   tex.height = h;
-    grit.width = w;  grit.height = h;
-    komo.width = w;  komo.height = h;
-    paintConcrete(w, h);
-    paintGrit(w, h);
+  // 2. Warm noise pixels — tinted amber/steel, variable alpha
+  var img = ctx.createImageData(SIZE, SIZE);
+  var d = img.data;
+  for (var i = 0; i < d.length; i += 4) {
+    var v = (Math.random() * 255) | 0;
+    var warm = Math.random() > 0.68 ? 14 : 0;
+    var cool = Math.random() > 0.84 ? 9  : 0;
+    d[i]   = Math.min(255, v + warm);
+    d[i+1] = Math.min(255, v + (warm >> 2));
+    d[i+2] = Math.min(255, v + cool);
+    d[i+3] = 16 + ((Math.random() * 18) | 0);
+  }
+  ctx.putImageData(img, 0, 0);
+
+  // 3. Fingerprint shadow pools — the leaf-shadow komorebi effect
+  for (var e = 0; e < 7; e++) {
+    var ex = Math.random() * SIZE;
+    var ey = Math.random() * SIZE;
+    var er = 28 + Math.random() * 90;
+    var ep = ctx.createRadialGradient(ex, ey, 0, ex, ey, er);
+    if (Math.random() > 0.45) {
+      ep.addColorStop(0, 'rgba(28,18,8,0.10)');
+      ep.addColorStop(1, 'rgba(28,18,8,0)');
+    } else {
+      ep.addColorStop(0, 'rgba(12,22,32,0.08)');
+      ep.addColorStop(1, 'rgba(12,22,32,0)');
+    }
+    ctx.fillStyle = ep;
+    ctx.beginPath();
+    ctx.ellipse(
+      ex, ey,
+      er * (0.5 + Math.random() * 0.9),
+      er * (0.35 + Math.random() * 0.65),
+      Math.random() * Math.PI, 0, Math.PI * 2
+    );
+    ctx.fill();
   }
 
-  // Warm noise + radial elliptical shadow pools (the "fingerprint" effect)
-  function paintConcrete(w, h) {
-    ctx.clearRect(0, 0, w, h);
-
-    // Radial vignette — warm parchment centre fading to deeper edge
-    const base = ctx.createRadialGradient(w*0.44, h*0.40, 0, w*0.5, h*0.5, w*0.88);
-    base.addColorStop(0,   'rgba(237,229,216,0.0)');
-    base.addColorStop(0.5, 'rgba(200,188,168,0.12)');
-    base.addColorStop(1,   'rgba(140,125,100,0.40)');
-    ctx.fillStyle = base;
-    ctx.fillRect(0, 0, w, h);
-
-    // Warm noise pixels — tinted to the amber/steel palette
-    const img = ctx.createImageData(w, h);
-    const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const v = (Math.random() * 255) | 0;
-      // Warm tint: slightly push red channel on ~30% of pixels
-      const warm = Math.random() > 0.7 ? 14 : 0;
-      // Steel tint: slightly push blue on ~15% of pixels
-      const cool = Math.random() > 0.85 ? 8 : 0;
-      d[i]   = Math.min(255, v + warm);
-      d[i+1] = Math.min(255, v + (warm >> 2));
-      d[i+2] = Math.min(255, v + cool);
-      d[i+3] = 18 + (Math.random() * 16 | 0);
-    }
-    ctx.putImageData(img, 0, 0);
-
-    // Fingerprint shadow pools — irregular dark ellipses (komorebi leaf shadows)
-    for (let e = 0; e < 9; e++) {
-      const ex = Math.random() * w;
-      const ey = Math.random() * h;
-      const er = 35 + Math.random() * 140;
-      const ep = ctx.createRadialGradient(ex, ey, 0, ex, ey, er);
-      // Pool colour varies between amber-shadow and steel-shadow
-      const isWarm = Math.random() > 0.45;
-      if (isWarm) {
-        ep.addColorStop(0, 'rgba(28,18,8,0.09)');
-        ep.addColorStop(1, 'rgba(28,18,8,0)');
-      } else {
-        ep.addColorStop(0, 'rgba(12,22,32,0.07)');
-        ep.addColorStop(1, 'rgba(12,22,32,0)');
-      }
-      ctx.fillStyle = ep;
-      ctx.beginPath();
-      ctx.ellipse(
-        ex, ey,
-        er * (0.5 + Math.random() * 0.9),
-        er * (0.35 + Math.random() * 0.65),
-        Math.random() * Math.PI,
-        0, Math.PI * 2
-      );
-      ctx.fill();
-    }
-
-    // Additional amber bloom pools — warm light patches between shadows
-    for (let b = 0; b < 4; b++) {
-      const bx = Math.random() * w;
-      const by = Math.random() * h * 0.6; // biased toward top (like light through canopy)
-      const br = 60 + Math.random() * 100;
-      const bp = ctx.createRadialGradient(bx, by, 0, bx, by, br);
-      bp.addColorStop(0, 'rgba(195,165,88,0.06)');
-      bp.addColorStop(1, 'rgba(195,165,88,0)');
-      ctx.fillStyle = bp;
-      ctx.beginPath();
-      ctx.ellipse(bx, by, br * (0.7 + Math.random() * 0.5), br * (0.5 + Math.random() * 0.5), Math.random() * Math.PI, 0, Math.PI * 2);
-      ctx.fill();
-    }
+  // 4. Amber bloom patches — warm light pools between shadows
+  for (var b = 0; b < 3; b++) {
+    var bx = Math.random() * SIZE;
+    var by = Math.random() * SIZE * 0.65;
+    var br = 40 + Math.random() * 80;
+    var bp = ctx.createRadialGradient(bx, by, 0, bx, by, br);
+    bp.addColorStop(0, 'rgba(195,165,88,0.07)');
+    bp.addColorStop(1, 'rgba(195,165,88,0)');
+    ctx.fillStyle = bp;
+    ctx.beginPath();
+    ctx.ellipse(bx, by, br*(0.7+Math.random()*0.5), br*(0.5+Math.random()*0.5), Math.random()*Math.PI, 0, Math.PI*2);
+    ctx.fill();
   }
 
-  // Fine scattered grit — light/dark specks at overlay blend
-  function paintGrit(w, h) {
-    gctx.clearRect(0, 0, w, h);
-    const img2 = gctx.createImageData(w, h);
-    const d2 = img2.data;
-    for (let i = 0; i < d2.length; i += 4) {
-      if (Math.random() > 0.16) { d2[i+3] = 0; continue; }
-      const v = Math.random() > 0.5 ? 235 : 12;
-      d2[i] = d2[i+1] = d2[i+2] = v;
-      d2[i+3] = 6 + (Math.random() * 16 | 0);
-    }
-    gctx.putImageData(img2, 0, 0);
+  // 5. Fine grit — second pass with scattered light/dark specks
+  var img2 = ctx.createImageData(SIZE, SIZE);
+  var d2 = img2.data;
+  for (var j = 0; j < d2.length; j += 4) {
+    if (Math.random() > 0.14) { d2[j+3] = 0; continue; }
+    var gv = Math.random() > 0.5 ? 230 : 15;
+    d2[j] = d2[j+1] = d2[j+2] = gv;
+    d2[j+3] = 5 + ((Math.random() * 14) | 0);
   }
+  // Paint grit at reduced alpha using globalAlpha
+  var gritOff = document.createElement('canvas');
+  gritOff.width = SIZE; gritOff.height = SIZE;
+  var gctx = gritOff.getContext('2d');
+  gctx.putImageData(img2, 0, 0);
+  ctx.globalAlpha = 0.55;
+  ctx.drawImage(gritOff, 0, 0);
+  ctx.globalAlpha = 1.0;
 
-  // Komorebi cascade — animated drifting leaf-shadow bands on the komo canvas
-  // These are soft diagonal shadow stripes that shift slowly, like light through leaves
-  let komoOffset = 0;
-  function paintKomorebi() {
-    const w = komo.width, h = komo.height;
-    kctx.clearRect(0, 0, w, h);
+  // 6. Bake to data URL and apply as body background
+  var dataURL = off.toDataURL('image/png');
+  document.body.style.backgroundImage = 'url(' + dataURL + ')';
+  document.body.style.backgroundRepeat = 'repeat';
+  document.body.style.backgroundSize = SIZE + 'px ' + SIZE + 'px';
 
-    // Draw 8–12 soft diagonal shadow bands
-    const bands = 10;
-    for (let i = 0; i < bands; i++) {
-      const x = ((komoOffset * 0.3 + i * (w / bands) * 1.3) % (w * 1.6)) - w * 0.3;
-      const bw = 18 + Math.sin(i * 1.7 + komoOffset * 0.01) * 12;
-      const opacity = 0.04 + Math.sin(i * 2.3 + komoOffset * 0.008) * 0.025;
+  // ── SCROLL REVEAL — IntersectionObserver, works on iOS ────────────
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
 
-      // Each band is a soft diagonal strip
-      const grad = kctx.createLinearGradient(x, 0, x + bw, h * 0.8);
-      grad.addColorStop(0,   `rgba(32,24,14,0)`);
-      grad.addColorStop(0.3, `rgba(32,24,14,${opacity.toFixed(3)})`);
-      grad.addColorStop(0.7, `rgba(32,24,14,${opacity.toFixed(3)})`);
-      grad.addColorStop(1,   `rgba(32,24,14,0)`);
-      kctx.fillStyle = grad;
-      kctx.beginPath();
-      kctx.moveTo(x - h * 0.4, 0);
-      kctx.lineTo(x + bw - h * 0.4, 0);
-      kctx.lineTo(x + bw + h * 0.4, h);
-      kctx.lineTo(x + h * 0.4, h);
-      kctx.closePath();
-      kctx.fill();
-    }
-
-    komoOffset += 0.4;
-    requestAnimationFrame(paintKomorebi);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  paintKomorebi();
-
-  // Scroll-reveal for content sections
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
+    var targets = document.querySelectorAll(
+      '#artisan .section-wrap > *, #light .section-wrap > *, ' +
+      '#textile .section-wrap > *, #services .service-group, ' +
+      '#services .services-note, #booking .section-wrap > *, ' +
+      '#aftercare .aftercare-item'
+    );
+    targets.forEach(function(el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.75s ease, transform 0.75s ease';
+      observer.observe(el);
     });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll(
-    '#artisan .section-wrap > *, #light .section-wrap > *, #textile .section-wrap > *, ' +
-    '#services .service-group, #services .services-note, ' +
-    '#booking .section-wrap > *, #aftercare .aftercare-item'
-  ).forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(16px)';
-    el.style.transition = 'opacity 0.75s ease, transform 0.75s ease';
-    observer.observe(el);
-  });
+  }
 })();
 </script>
-
 </body>
 </html>
