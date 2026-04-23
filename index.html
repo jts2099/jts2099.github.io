@@ -1,1248 +1,746 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Persona — Hair Colour Atelier · Fort Bragg, CA</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Pinyon+Script&family=Jost:wght@200;300;400&family=Josefin+Sans:wght@100;300;400&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persona — Hair Colour Atelier · Fort Bragg, CA</title>
+<meta name="description" content="Bespoke hair colour crafted with 30+ years of expertise. By appointment, Fort Bragg, California.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --parchment:     #ede5d8;
+  --parchment-mid: #e0d6c5;
+  --parchment-deep:#cfc3ae;
+  --parchment-dark:#bfb09a;
+  --steel:         #7a98aa;
+  --steel-deep:    #4a6270;
+  --steel-dim:     #aabfcc;
+  --amber:         #af8430;
+  --amber-soft:    #c8a558;
+  --amber-dim:     #8c6820;
+  --amber-pale:    #e8d090;
+  --coral:         #c45a48;
+  --coral-soft:    #d68870;
+  --ink:           #1a1714;
+  --ink-mid:       #2a2520;
+  --grey:          #42403a;
+  --grey-light:    #605a52;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+/* Texture baked at load via JS into body background — iOS safe */
+/* Cascade leaf shadows — CSS only, no fixed canvas needed */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(
+      108deg,
+      transparent 0px,
+      transparent 38px,
+      rgba(28,20,12,0.032) 38px,
+      rgba(28,20,12,0.032) 52px,
+      transparent 52px,
+      transparent 90px,
+      rgba(28,20,12,0.022) 90px,
+      rgba(28,20,12,0.022) 98px,
+      transparent 98px,
+      transparent 145px,
+      rgba(28,20,12,0.038) 145px,
+      rgba(28,20,12,0.038) 164px,
+      transparent 164px,
+      transparent 220px,
+      rgba(28,20,12,0.018) 220px,
+      rgba(28,20,12,0.018) 226px
+    );
+  animation: cascadeShift 28s linear infinite;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background:
+    repeating-linear-gradient(
+      112deg,
+      transparent 0px,
+      transparent 55px,
+      rgba(18,28,36,0.025) 55px,
+      rgba(18,28,36,0.025) 72px,
+      transparent 72px,
+      transparent 130px,
+      rgba(28,20,12,0.028) 130px,
+      rgba(28,20,12,0.028) 149px,
+      transparent 149px,
+      transparent 200px,
+      rgba(18,28,36,0.020) 200px,
+      rgba(18,28,36,0.020) 210px
+    );
+  animation: cascadeShift2 38s linear infinite;
+}
+@keyframes cascadeShift {
+  from { background-position: 0 0; }
+  to   { background-position: 600px 800px; }
+}
+@keyframes cascadeShift2 {
+  from { background-position: 0 0; }
+  to   { background-position: -500px 700px; }
+}
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 3.5rem;
+  background: rgba(237,229,216,0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--steel-dim);
+}
+.nav-logo { font-family:'IM Fell English',serif; font-style:italic; font-size:1.55rem; color:var(--ink); text-decoration:none; }
+.nav-links { display:flex; gap:2.8rem; list-style:none; }
+.nav-links a { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--grey); text-decoration:none; transition:color 0.3s; }
+.nav-links a:hover { color:var(--amber); }
 
-    :root {
-      --parchment:  #E2DAC8;
-      --cream:      #D0C8B4;
-      --ink:        #141210;
-      --ink-warm:   #201A14;
-      --ink-mid:    #2E2820;
-      --gold:       #9E7438;
-      --gold-light: #B88E52;
-      --gold-dim:   #6A5028;
-      --copper:     #884428;
-      --rose:       #A05060;
-      --violet:     #5C4878;
-      --teal:       #226658;
-      --amber:      #A46010;
-      --concrete:   #8A8278;
-      --rust:       #7A3820;
-      --soot:       #1C1814;
-    }
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 9rem 2rem 6rem;
+  position: relative; overflow: hidden; background: var(--parchment);
+}
+/* Whorl — the rotating conic shadow effect */
+#hero .whorl-1 {
+  position: absolute; inset: -25%;
+  background: conic-gradient(
+    from 200deg at 38% 42%,
+    rgba(122,152,170,0.14) 0deg, rgba(175,132,48,0.11) 55deg,
+    transparent 110deg, rgba(196,90,72,0.07) 160deg,
+    rgba(122,152,170,0.09) 220deg, transparent 290deg,
+    rgba(175,132,48,0.08) 340deg, rgba(122,152,170,0.14) 360deg
+  );
+  animation: whorl 22s linear infinite;
+  pointer-events: none;
+}
+#hero .whorl-2 {
+  position: absolute; inset: -20%;
+  background: conic-gradient(
+    from 20deg at 62% 55%,
+    transparent 0deg, rgba(175,132,48,0.09) 60deg,
+    rgba(122,152,170,0.11) 130deg, transparent 200deg,
+    rgba(196,90,72,0.06) 270deg, transparent 360deg
+  );
+  animation: whorl 34s linear infinite reverse;
+  pointer-events: none;
+}
+@keyframes whorl { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
 
-    html { scroll-behavior: smooth; }
+/* Komorebi light shafts */
+#hero .komo {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 12% 70% at 28% 0%, rgba(195,165,88,0.22) 0%, transparent 80%),
+    radial-gradient(ellipse 8% 55% at 45% 0%, rgba(195,165,88,0.14) 0%, transparent 70%),
+    radial-gradient(ellipse 10% 65% at 60% 0%, rgba(195,165,88,0.10) 0%, transparent 75%),
+    radial-gradient(ellipse 7% 45% at 73% 0%, rgba(195,165,88,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 16% 40% at 18% 0%, rgba(122,152,170,0.12) 0%, transparent 60%);
+  animation: komo 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes komo { 0%{opacity:.6;transform:translateX(-8px) scaleX(1);} 100%{opacity:1;transform:translateX(8px) scaleX(1.04);} }
 
-    body {
-      background: #CEC6B4;
-      font-family: 'Jost', sans-serif;
-      color: var(--ink);
-      overflow-x: hidden;
-    }
+.hero-eyebrow { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.66rem; letter-spacing:0.38em; text-transform:uppercase; color:var(--steel-deep); margin-bottom:2rem; position:relative; z-index:2; animation:fadeUp 1.2s ease both; }
+.hero-title { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(5rem,13vw,10rem); color:var(--ink); line-height:0.88; margin-bottom:1.2rem; position:relative; z-index:2; animation:fadeUp 1.2s .15s ease both; }
+.hero-sub { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.72rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--steel-deep); margin-bottom:1rem; position:relative; z-index:2; animation:fadeUp 1.2s .28s ease both; }
+.hero-rule { width:80px; height:1px; background:var(--amber-dim); margin:0 auto 1.8rem; position:relative; z-index:2; animation:fadeUp 1.2s .35s ease both; }
+.hero-tagline { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.3rem; color:var(--ink-mid); margin-bottom:3.5rem; position:relative; z-index:2; animation:fadeUp 1.2s .42s ease both; }
+.hero-cta { position:relative; z-index:2; animation:fadeUp 1.2s .55s ease both; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px);} to{opacity:1;transform:translateY(0);} }
 
-    canvas#texture {
-      position: fixed; inset: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-      opacity: 0.85; mix-blend-mode: multiply;
-    }
+.scroll-hint { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; z-index:2; animation:fadeUp 1.2s 1.1s ease both; }
+.scroll-hint span { font-family:'Josefin Sans',sans-serif; font-size:0.55rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--grey-light); }
+.scroll-line { width:1px; height:44px; background:linear-gradient(to bottom, var(--amber-dim), transparent); animation:dropLine 2.2s ease-in-out infinite; }
+@keyframes dropLine { 0%,100%{opacity:0;transform:scaleY(0);transform-origin:top;} 50%{opacity:1;transform:scaleY(1);} }
 
-    canvas#grit {
-      position: fixed; inset: 0;
-      width: 100%; height: 100%;
-      pointer-events: none; z-index: 0;
-      opacity: 0.4; mix-blend-mode: overlay;
-    }
+/* BUTTONS */
+.btn { display:inline-block; font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.7rem; letter-spacing:0.26em; text-transform:uppercase; color:var(--ink); text-decoration:none; border:1px solid var(--steel); padding:0.95rem 2.6rem; transition:all .35s; position:relative; overflow:hidden; z-index:1; }
+.btn::before { content:''; position:absolute; inset:0; background:var(--steel-dim); transform:scaleX(0); transform-origin:left; transition:transform .35s; z-index:-1; }
+.btn:hover { border-color:var(--steel-deep); }
+.btn:hover::before { transform:scaleX(1); }
+.btn-primary { background:var(--ink); color:var(--parchment); border-color:var(--ink); }
+.btn-primary::before { background:var(--steel-deep); }
+.btn-primary:hover { color:var(--parchment); }
 
-    .bleeds {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0; overflow: hidden;
-    }
-    .bleed { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0; animation: bleedIn 2s ease forwards; }
-    .b1 { width:320px;height:220px;background:var(--rose);   top:-60px;   left:-80px;  animation-delay:0.2s; --t:0.11; }
-    .b2 { width:260px;height:200px;background:var(--violet); top:-40px;   right:-60px; animation-delay:0.5s; --t:0.09; }
-    .b3 { width:300px;height:180px;background:var(--teal);   bottom:-50px;left:-40px;  animation-delay:0.8s; --t:0.10; }
-    .b4 { width:280px;height:200px;background:var(--amber);  bottom:-60px;right:-50px; animation-delay:0.4s; --t:0.09; }
-    .b5 { width:200px;height:150px;background:var(--copper); top:40%;     left:5%;     animation-delay:1.0s; --t:0.06; }
-    @keyframes bleedIn { to { opacity: var(--t); } }
+/* SECTIONS */
+.section-wrap { padding:6.5rem 4rem; max-width:880px; margin:0 auto; }
+.section-wrap.wide { max-width:1060px; }
+.section-label { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.63rem; letter-spacing:0.38em; text-transform:uppercase; color:var(--steel-deep); margin-bottom:0.9rem; }
+.section-title { font-family:'IM Fell English',serif; font-style:italic; font-size:clamp(2.1rem,4.5vw,3.3rem); color:var(--ink); margin-bottom:2.2rem; line-height:1.15; }
 
-    #cover {
-      position: relative; z-index: 2;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      min-height: 100vh;
-      padding: clamp(24px,5vw,48px);
-    }
+.rule { display:flex; align-items:center; gap:1rem; margin:1.8rem 0; }
+.rule::before,.rule::after { content:''; flex:1; height:1px; background:var(--steel-dim); }
+.rule-diamond { width:7px; height:7px; background:var(--amber); transform:rotate(45deg); flex-shrink:0; }
 
-    .stage {
-      display: flex; flex-direction: column;
-      align-items: center;
-      width: min(94vw, 680px);
-    }
+/* Whorl backgrounds for content sections */
+.whorl-bg { position:relative; overflow:hidden; }
+.whorl-bg::before {
+  content:''; position:absolute; inset:-80%;
+  background: conic-gradient(from 90deg at 65% 50%, rgba(122,152,170,0.06) 0deg, transparent 90deg, rgba(175,132,48,0.05) 180deg, transparent 270deg, rgba(122,152,170,0.05) 360deg);
+  animation:whorl 42s linear infinite; pointer-events:none;
+}
 
-    .flourish-top {
-      width: min(88vw, 420px); height: auto;
-      opacity: 0;
-      animation: fadeScale 1.2s cubic-bezier(0.16,1,0.3,1) 0.6s forwards;
-      margin-bottom: clamp(-4px,-1vw,-8px);
-    }
-    .flourish-bottom {
-      width: min(88vw, 420px); height: auto;
-      opacity: 0;
-      animation: fadeScale 1.2s cubic-bezier(0.16,1,0.3,1) 2.8s forwards;
-      margin-top: clamp(10px,2.5vw,18px);
-    }
-    @keyframes fadeScale {
-      from { opacity:0; transform:scaleX(0.7); }
-      to   { opacity:1; transform:scaleX(1); }
-    }
+/* ARTISAN */
+#artisan { background:var(--parchment); }
+#artisan .section-wrap > p { color:var(--ink-mid); margin-bottom:1.5rem; font-size:1.05rem; }
+#artisan em { color:var(--ink); font-style:italic; }
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; margin-top:3.5rem; padding-top:2.5rem; border-top:1px solid var(--parchment-deep); }
+.stat-num { font-family:'IM Fell English',serif; font-size:3rem; color:var(--amber); line-height:1; display:block; }
+.stat-label { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--grey-light); margin-top:0.4rem; }
 
-    .eyebrow {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(10px,1.8vw,12px); letter-spacing: 0.45em;
-      text-transform: uppercase; color: var(--ink-mid);
-      opacity: 0; transform: translateY(6px);
-      animation: fadeUp 1s ease 1s forwards;
-      margin-bottom: clamp(6px,2vw,14px);
-    }
+/* LIGHT */
+#light { background:var(--parchment-mid); }
+#light .section-wrap > p { color:var(--ink-mid); font-style:italic; font-size:1.08rem; margin-bottom:0.6rem; }
+.light-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2.5rem; margin-top:3.5rem; }
+.light-card { padding:1.8rem 0; border-top:1px solid var(--steel-dim); }
+.light-card h3 { font-family:'IM Fell English',serif; font-style:italic; font-size:1.35rem; color:var(--ink); margin-bottom:0.8rem; }
+.light-card p { font-size:0.97rem; color:var(--ink-mid); line-height:1.7; }
 
-    .script-wrap { position: relative; line-height: 1; margin-bottom: clamp(-6px,-1.5vw,-12px); }
-    .script-word {
-      font-family: 'Pinyon Script', cursive;
-      font-size: clamp(88px,22vw,190px); color: var(--ink); line-height: 0.9;
-      opacity: 0; transform: translateY(20px) rotate(-1.5deg);
-      animation: scriptIn 1.2s cubic-bezier(0.16,1,0.3,1) 1.1s forwards;
-      display: block; position: relative; z-index: 2;
-      -webkit-font-smoothing: antialiased;
-      text-shadow: 1px 1px 0 rgba(26,20,16,0.15), 2px 2px 6px rgba(26,20,16,0.08);
-      filter: contrast(1.08) brightness(0.88);
-    }
-    @keyframes scriptIn { to { opacity:1; transform:translateY(0) rotate(-1.5deg); } }
+/* TEXTILE */
+#textile { background:var(--parchment); }
+.pullquote { border-left:2px solid var(--amber); padding:1.5rem 0 1.5rem 2.5rem; margin:3rem 0; position:relative; }
+.pullquote::before { content:'\201C'; font-family:'IM Fell English',serif; font-size:6rem; color:var(--amber-pale); position:absolute; top:-1.5rem; left:-1.2rem; line-height:1; z-index:0; }
+.pullquote p { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.55rem; line-height:1.55; color:var(--ink-mid); position:relative; z-index:1; }
+.pullquote em { color:var(--steel-deep); font-style:normal; font-weight:500; }
+.pullquote cite { display:block; margin-top:1.1rem; font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.63rem; letter-spacing:0.26em; text-transform:uppercase; color:var(--amber-dim); position:relative; z-index:1; }
+#textile .section-wrap > p { color:var(--ink-mid); font-size:1.05rem; }
+.fabric-row { display:flex; gap:1rem; margin-top:1.8rem; flex-wrap:wrap; }
+.fabric-tag { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.66rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--steel-deep); border:1px solid var(--steel-dim); padding:0.4rem 1.1rem; }
 
-    .colour-bar {
-      position: absolute; left: clamp(10px,4vw,28px); bottom: clamp(6px,2vw,14px);
-      height: clamp(5px,1.2vw,8px); width: 0; border-radius: 2px;
-      background: linear-gradient(to right, var(--rose) 0%,var(--violet) 22%,var(--teal) 44%,var(--amber) 66%,var(--gold) 88%,var(--copper) 100%);
-      animation: barGrow 1.4s cubic-bezier(0.16,1,0.3,1) 2s forwards;
-      z-index: 1; filter: blur(0.5px); opacity: 0.85;
-    }
-    @keyframes barGrow { to { width: 88%; } }
+/* SERVICES */
+#services { background:var(--ink); }
+#services .section-label { color:var(--steel-dim); }
+#services .section-title { color:var(--parchment); }
+#services .rule::before, #services .rule::after { background:rgba(122,152,170,0.3); }
+.service-group { margin-bottom:3.5rem; position:relative; z-index:1; }
+.service-group-title { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--steel); margin-bottom:1.2rem; padding-bottom:0.8rem; border-bottom:1px solid rgba(122,152,170,0.25); }
+.service-item { display:flex; justify-content:space-between; align-items:baseline; padding:1rem 0; border-bottom:1px solid rgba(122,152,170,0.10); gap:2rem; }
+.service-name { font-family:'Cormorant Garamond',serif; font-size:1.12rem; color:var(--parchment-mid); }
+.service-name em { display:block; font-size:0.8rem; color:var(--steel); font-style:italic; margin-top:0.2rem; line-height:1.45; }
+.service-price { font-family:'IM Fell English',serif; font-style:italic; font-size:1.25rem; color:var(--amber-soft); white-space:nowrap; flex-shrink:0; }
+.services-note { margin-top:3rem; padding:2rem 2.5rem; border:1px solid rgba(122,152,170,0.2); font-size:0.88rem; color:var(--steel); line-height:1.85; position:relative; z-index:1; }
+.services-note p { margin-bottom:0.8rem; }
+.services-note p:last-child { margin-bottom:0; font-style:italic; color:rgba(122,152,170,0.6); }
 
-    .subtitle {
-      font-family: 'Playfair Display', serif; font-size: clamp(10.5px,1.9vw,13.5px);
-      font-weight: 400; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--gold); font-style: italic;
-      opacity: 0; transform: translateY(8px);
-      animation: fadeUp 1s ease 2.3s forwards; margin-top: clamp(10px,2.5vw,18px);
-    }
+/* BOOKING */
+#booking { background:var(--parchment-mid); text-align:center; }
+#booking .section-title { margin-bottom:0.8rem; }
+#booking .section-wrap > p { color:var(--ink-mid); font-style:italic; margin-bottom:3rem; }
+.booking-ctas { display:flex; gap:1.5rem; justify-content:center; flex-wrap:wrap; margin-bottom:4rem; }
+.booking-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; text-align:left; }
+.policy-card { padding:1.6rem; border:1px solid var(--parchment-dark); background:rgba(237,229,216,0.7); }
+.policy-card h4 { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.63rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--steel-deep); margin-bottom:0.6rem; }
+.policy-card p { font-size:0.94rem; color:var(--ink-mid); }
+.policy-card em { color:var(--ink); font-style:italic; }
 
-    .swatches {
-      display: flex; align-items: center; gap: clamp(6px,1.5vw,10px);
-      margin-top: clamp(14px,3vh,24px); opacity: 0;
-      animation: fadeUp 1s ease 2.6s forwards;
-    }
-    .swatch {
-      width: clamp(18px,4vw,26px); height: clamp(18px,4vw,26px); border-radius: 50%;
-      cursor: default; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.15); position: relative;
-    }
-    .swatch:hover { transform: scale(1.25) translateY(-3px); box-shadow: 0 4px 14px rgba(0,0,0,0.2); }
-    .swatch::after { content:''; position:absolute; inset:2px; border-radius:50%; border:1px solid rgba(255,255,255,0.3); }
-    .swatch-line { width: clamp(16px,3.5vw,24px); height:1px; background:var(--gold); opacity:0.4; }
-    .s1{background:var(--rose);} .s2{background:var(--violet);}
-    .s3{background:var(--teal);} .s4{background:var(--amber);}
-    .s5{background:var(--gold-light);} .s6{background:var(--copper);}
+/* AFTERCARE */
+#aftercare { background:var(--parchment); }
+.aftercare-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:2rem; margin-top:3rem; }
+.aftercare-item { padding:1.5rem 0; border-top:1px solid var(--steel-dim); }
+.aftercare-item h4 { font-family:'Cormorant Garamond',serif; font-size:1.08rem; font-weight:500; color:var(--ink); margin-bottom:0.5rem; }
+.aftercare-item p { font-size:0.95rem; color:var(--ink-mid); }
 
-    .tagline {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.6vw,11px); letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--ink-mid); opacity: 0;
-      animation: fadeUp 1s ease 3.2s forwards; margin-top: clamp(6px,1.5vw,12px);
-    }
+/* FOOTER */
+footer { background:var(--ink); color:var(--parchment-deep); text-align:center; padding:5.5rem 2rem 3.5rem; position:relative; overflow:hidden; }
+footer .whorl-f { position:absolute; inset:-60%; background:conic-gradient(from 10deg at 50% 50%, rgba(122,152,170,0.08) 0deg, transparent 80deg, rgba(175,132,48,0.06) 160deg, transparent 260deg, rgba(196,90,72,0.04) 320deg, rgba(122,152,170,0.07) 360deg); animation:whorl 38s linear infinite reverse; pointer-events:none; }
+.footer-logo { font-family:'IM Fell English',serif; font-style:italic; font-size:3.8rem; color:var(--parchment); display:block; margin-bottom:0.4rem; position:relative; z-index:1; }
+.footer-sub { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.63rem; letter-spacing:0.32em; text-transform:uppercase; color:var(--steel); margin-bottom:2.5rem; position:relative; z-index:1; }
+.footer-details { font-size:0.9rem; color:var(--grey-light); line-height:2.1; margin-bottom:2.5rem; position:relative; z-index:1; }
+.footer-details a { color:var(--amber-soft); text-decoration:none; }
+.footer-details a:hover { color:var(--amber); }
+.footer-davines { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.6rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--steel-deep); margin-top:2rem; padding-top:2rem; border-top:1px solid rgba(122,152,170,0.15); position:relative; z-index:1; }
+.footer-davines strong { color:var(--steel); }
+.footer-end { font-family:'Josefin Sans',sans-serif; font-weight:200; font-size:0.56rem; letter-spacing:0.22em; color:rgba(74,98,112,0.5); margin-top:1.5rem; position:relative; z-index:1; }
 
-    .scroll-cue {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 8px; margin-top: clamp(24px,4vh,40px);
-      opacity: 0; animation: fadeUp 1s ease 3.8s forwards; cursor: pointer;
-    }
-    .scroll-cue-label {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.5vw,10.5px); letter-spacing: 0.45em;
-      text-transform: uppercase; color: var(--gold-dim);
-    }
-    .scroll-cue-arrow {
-      width: 1px; height: 0; background: var(--gold-dim);
-      animation: arrowGrow 1s ease 4.2s forwards; position: relative;
-    }
-    .scroll-cue-arrow::after {
-      content: ''; position: absolute; bottom: 0; left: 50%;
-      width: 5px; height: 5px;
-      border-right: 1px solid var(--gold-dim); border-bottom: 1px solid var(--gold-dim);
-      transform: translateX(-50%) rotate(45deg);
-    }
-    @keyframes arrowGrow { to { height: 32px; } }
-
-    .corner {
-      position: fixed; width: clamp(32px,6vw,44px); height: clamp(32px,6vw,44px);
-      opacity: 0; animation: fadeUp 1s ease 3.4s forwards; z-index: 10;
-    }
-    .corner.tl { top:18px; left:18px; }
-    .corner.tr { top:18px; right:18px; transform: scaleX(-1); }
-    .corner.bl { bottom:18px; left:18px; transform: scaleY(-1); }
-    .corner.br { bottom:18px; right:18px; transform:scale(-1,-1); }
-    @media(max-width:480px){ .corner{display:none;} }
-
-    .corona-ring {
-      position: absolute; border-radius: 50%;
-      border: 1px solid rgba(200,131,26,0.15);
-      animation: coronaPulse 7s ease-in-out infinite; pointer-events: none;
-    }
-    @keyframes coronaPulse {
-      0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.15; }
-      50%      { transform: translate(-50%,-50%) scale(1.10); opacity: 0.04; }
-    }
-
-    /* LIGHT SECTION */
-    #light {
-      position: relative; z-index: 2; background: var(--parchment);
-      padding: clamp(64px,11vh,108px) clamp(24px,6vw,54px);
-      display: flex; flex-direction: column; align-items: center; overflow: hidden;
-    }
-    #light .field-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.055; }
-    .light-inner { position: relative; z-index: 1; max-width: 680px; width: 100%; }
-    .light-eyebrow {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.6vw,11px); letter-spacing: 0.45em; text-transform: uppercase;
-      color: var(--gold-dim); margin-bottom: clamp(14px,3vh,24px);
-      display: flex; align-items: center; gap: 14px;
-    }
-    .light-eyebrow::before,.light-eyebrow::after {
-      content:''; flex:1; height:1px;
-      background: linear-gradient(to right, transparent, rgba(184,150,90,0.4));
-    }
-    .light-eyebrow::after { background: linear-gradient(to left, transparent, rgba(184,150,90,0.4)); }
-    .discharge-centrepiece { display: block; width: min(90vw, 480px); height: auto; margin: 0 auto clamp(28px,5vh,44px); }
-    .light-headline {
-      font-family: 'Pinyon Script', cursive; font-size: clamp(40px,10vw,72px);
-      color: var(--ink); line-height: 1; text-align: center;
-      margin-bottom: clamp(8px,2vh,16px); -webkit-font-smoothing: antialiased;
-      text-shadow: 1px 1px 0 rgba(26,20,16,0.1);
-    }
-    .light-body {
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(15px,2.7vw,18px); line-height: 1.82;
-      color: var(--ink-mid); text-align: center; margin-bottom: clamp(16px,3.5vh,28px);
-    }
-    .light-body em { color: var(--copper); font-style: normal; }
-    .light-tiles {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,175px),1fr));
-      gap: clamp(12px,2.5vw,20px); margin-top: clamp(20px,4vh,36px);
-    }
-    .light-tile {
-      border: 1px solid rgba(184,150,90,0.28); padding: clamp(18px,2.5vw,26px) clamp(14px,2vw,20px);
-      position: relative; text-align: center;
-      background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, transparent 40%), rgba(230,222,210,0.45);
-      border: 1px solid rgba(158,116,56,0.2);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 2px 8px rgba(0,0,0,0.1);
-      overflow: hidden;
-    }
-    .light-tile::before {
-      content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
-      background: linear-gradient(to right, transparent, var(--amber), transparent); opacity: 0.55;
-    }
-    .light-tile-icon { display:block; width:48px; height:48px; margin:0 auto clamp(10px,2vh,16px); }
-    .light-tile-title { font-family: 'Playfair Display', serif; font-size: clamp(12px,2.5vw,14.5px); font-weight: 400; color: var(--ink); margin-bottom: 7px; }
-    .light-tile-body { font-family: 'Jost', sans-serif; font-weight:300; font-size: clamp(11.5px,2vw,13px); color: var(--ink-mid); line-height:1.7; font-style:italic; }
-
-    /* BIO SECTION */
-    #bio {
-      position: relative; z-index: 2;
-      background: var(--soot);
-      background-image:
-        repeating-linear-gradient(92deg, transparent, transparent 3px, rgba(255,255,255,0.012) 3px, rgba(255,255,255,0.012) 4px),
-        repeating-linear-gradient(180deg, transparent, transparent 40px, rgba(0,0,0,0.04) 40px, rgba(0,0,0,0.04) 41px);
-      color: var(--parchment);
-      padding: clamp(60px,10vh,96px) clamp(24px,6vw,54px);
-      display: flex; flex-direction: column; align-items: center;
-    }
-    #bio::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(to right, transparent 0%, var(--rust) 8%, var(--gold-dim) 22%, transparent 35%, var(--gold) 48%, var(--rust) 60%, transparent 72%, var(--gold-dim) 88%, transparent 100%);
-      opacity: 0.6;
-    }
-    .bio-inner { max-width: 680px; width: 100%; }
-    .bio-eyebrow {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.6vw,11px); letter-spacing: 0.45em; text-transform: uppercase;
-      color: var(--gold-dim); margin-bottom: clamp(14px,3vh,24px);
-      display: flex; align-items: center; gap: 14px;
-    }
-    .bio-eyebrow::before,.bio-eyebrow::after {
-      content: ''; flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(184,150,90,0.3));
-    }
-    .bio-eyebrow::after { background: linear-gradient(to left, transparent, rgba(184,150,90,0.3)); }
-    .bio-headline {
-      font-family: 'Pinyon Script', cursive; font-size: clamp(42px,11vw,82px);
-      color: var(--gold); line-height: 1; text-align: center;
-      margin-bottom: clamp(10px,2.5vh,20px);
-      text-shadow: 0 0 40px rgba(184,150,90,0.15); -webkit-font-smoothing: antialiased;
-    }
-    .bio-rule {
-      width: clamp(60px,15vw,100px); height: 1px;
-      background: linear-gradient(to right, transparent 0%, var(--rust) 5%, var(--gold-dim) 20%, var(--gold) 45%, var(--gold-dim) 70%, var(--rust) 88%, transparent 100%);
-      margin: 0 auto clamp(24px,4vh,40px); opacity: 0.7;
-    }
-    .bio-body {
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(16px,2.8vw,19px); line-height: 1.82;
-      color: rgba(245,239,228,0.92); text-align: center; margin-bottom: clamp(20px,4vh,36px);
-    }
-    .bio-body em { color: var(--gold-light); font-style: normal; }
-    .bio-credentials {
-      display: flex; flex-wrap: wrap; justify-content: center;
-      gap: clamp(10px,2.5vw,18px); margin-top: clamp(20px,4vh,36px);
-    }
-    .credential {
-      border: 1px solid rgba(158,116,56,0.22);
-      padding: clamp(10px,2vw,14px) clamp(16px,3vw,24px);
-      position: relative; text-align: center;
-      background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 60%), rgba(20,18,16,0.3);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -1px 0 rgba(0,0,0,0.3), 0 2px 12px rgba(0,0,0,0.4);
-    }
-    .credential::before,.credential::after {
-      content:''; position:absolute; width:8px; height:8px; border-color: var(--gold); border-style: solid; opacity: 0.6;
-    }
-    .credential::before { top:-1px; left:-1px; border-width:1px 0 0 1px; }
-    .credential::after  { bottom:-1px; right:-1px; border-width:0 1px 1px 0; }
-    .credential-number {
-      font-family: 'Playfair Display', serif; font-size: clamp(26px,6vw,42px); font-weight: 400;
-      color: var(--gold-light); line-height: 1; display: block;
-      filter: contrast(1.1) brightness(0.85);
-      text-shadow: 0 1px 3px rgba(0,0,0,0.6), 0 0 20px rgba(158,116,56,0.2);
-    }
-    .credential-label {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.5vw,10.5px); letter-spacing: 0.35em; text-transform: uppercase;
-      color: rgba(245,239,228,0.65); display: block; margin-top: 5px;
-    }
-
-    /* MENU SECTION */
-    #menu {
-      position: relative; z-index: 2;
-      padding: clamp(52px,8vh,80px) clamp(24px,6vw,54px) clamp(60px,10vh,96px);
-      display: flex; flex-direction: column; align-items: center;
-      background-image:
-        radial-gradient(ellipse at 15% 30%, rgba(138,130,120,0.12) 0%, transparent 45%),
-        radial-gradient(ellipse at 85% 70%, rgba(136,68,40,0.07) 0%, transparent 40%),
-        repeating-linear-gradient(88deg, transparent, transparent 80px, rgba(0,0,0,0.018) 80px, rgba(0,0,0,0.018) 81px);
-    }
-    .menu-inner { max-width: 620px; width: 100%; }
-    .menu-header { text-align: center; margin-bottom: clamp(30px,5vh,48px); }
-    .menu-headline {
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(11px,2.2vw,13.5px); letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: clamp(6px,1.5vw,10px);
-    }
-    .menu-title {
-      font-family: 'Pinyon Script', cursive; font-size: clamp(56px,14vw,96px);
-      color: var(--ink); line-height: 0.9; -webkit-font-smoothing: antialiased;
-      text-shadow: 1px 1px 0 rgba(26,20,16,0.1), 2px 2px 6px rgba(26,20,16,0.06);
-    }
-    .menu-colour-bar {
-      height: 5px; width: 100%; border-radius: 2px;
-      background: linear-gradient(to right, var(--rose),var(--violet),var(--teal),var(--amber),var(--gold-light),var(--copper));
-      margin-top: 3px; opacity: 0.8; filter: blur(0.4px);
-    }
-    .section-label {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.7vw,11px); letter-spacing: 0.42em; text-transform: uppercase;
-      color: var(--gold-dim); margin-bottom: clamp(12px,2.5vh,18px);
-      display: flex; align-items: center; gap: 12px;
-    }
-    .section-label::before,.section-label::after {
-      content: ''; flex:1; height:1px;
-      background: linear-gradient(to right, transparent, var(--gold-dim));
-    }
-    .section-label::after { background: linear-gradient(to left, transparent, var(--gold-dim)); }
-    .menu-section { margin-bottom: clamp(28px,5vh,42px); }
-    .menu-item {
-      display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
-      padding: clamp(10px,2.2vh,15px) 0;
-      border-bottom: 1px solid rgba(158,116,56,0.12); position: relative;
-    }
-    .menu-item:last-child { border-bottom: none; }
-    .menu-item:hover .item-name { color: var(--gold-dim); transition: color 0.3s ease; }
-    .item-name { font-family: 'Playfair Display', serif; font-size: clamp(14px,3.2vw,18px); font-weight: 400; color: var(--ink); flex-shrink: 0; }
-    .item-note { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(10.5px,1.8vw,12px); color: var(--ink-mid); font-style: italic; margin-top: 2px; opacity: 0.85; }
-    .item-left { display: flex; flex-direction: column; }
-    .item-dots { flex: 1; border-bottom: 1px dotted rgba(158,116,56,0.22); margin-bottom: 4px; min-width: 20px; }
-    .item-price { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(13px,3vw,16px); color: var(--gold); white-space: nowrap; flex-shrink: 0; }
-
-    /* Toning tier divider label */
-    .tier-label {
-      width: 100%;
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(9px,1.6vw,10.5px); letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold-dim);
-      padding-top: clamp(10px,2vh,16px); padding-bottom: 4px;
-      border-top: 1px solid rgba(184,150,90,0.2);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .tier-label::after {
-      content: ''; flex: 1; height: 1px;
-      background: linear-gradient(to right, rgba(184,150,90,0.3), transparent);
-    }
-
-    .sep { width: 100%; margin: clamp(6px,1.5vh,12px) 0 clamp(18px,3.5vh,28px); opacity: 0.25; }
-
-    .special-service {
-      background: linear-gradient(135deg, rgba(138,130,120,0.08) 0%, transparent 50%), rgba(245,239,228,0.04);
-      border: 1px solid rgba(158,116,56,0.2);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 4px 20px rgba(0,0,0,0.08);
-      padding: clamp(14px,2.5vw,20px) clamp(16px,3vw,24px);
-      position: relative; overflow: hidden; margin-bottom: clamp(10px,2.5vh,18px);
-    }
-    .special-service::before {
-      content:''; position:absolute; left:0; top:0; bottom:0; width:3px;
-      background: linear-gradient(to bottom, var(--rose),var(--violet),var(--teal));
-    }
-    .special-name { font-family: 'Playfair Display', serif; font-size: clamp(14px,3.2vw,17px); color: var(--ink); margin-bottom: 5px; }
-    .special-desc { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(11.5px,2.1vw,13px); color: var(--ink-mid); line-height: 1.65; font-style: italic; }
-    .special-price { font-family: 'Playfair Display', serif; font-style: italic; color: var(--gold); font-size: clamp(11px,2.3vw,13px); margin-top: 5px; }
-
-    .notation {
-      border: 1px solid rgba(158,116,56,0.15); padding: clamp(16px,3vw,24px) clamp(18px,3.5vw,28px);
-      position: relative; background: rgba(138,130,120,0.06); margin-top: clamp(14px,3vh,24px);
-    }
-    .notation::before,.notation::after {
-      content:''; position:absolute; width:10px; height:10px; border-color: var(--gold); border-style: solid;
-    }
-    .notation::before { top:-1px; left:-1px; border-width:1.5px 0 0 1.5px; }
-    .notation::after  { bottom:-1px; right:-1px; border-width:0 1.5px 1.5px 0; }
-    .notation-title {
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(10px,1.7vw,11.5px); letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--gold-dim); margin-bottom: clamp(10px,2vh,14px);
-    }
-    .notation-item {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(12px,2.2vw,13.5px); color: var(--ink); line-height: 1.72;
-      padding-left: 16px; position: relative; margin-bottom: 10px;
-    }
-    .notation-item:last-child { margin-bottom: 0; }
-    .notation-item::before { content:'—'; position:absolute; left:0; color:var(--gold); font-size:10px; top:2px; }
-
-    /* TEXTILE SECTION */
-    #textile {
-      position: relative; z-index: 2; background: var(--ink-warm);
-      padding: clamp(64px,11vh,108px) clamp(24px,6vw,54px);
-      display: flex; flex-direction: column; align-items: center; overflow: hidden;
-    }
-    #textile::before {
-      content: ''; position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg,   transparent, transparent 3px, rgba(255,255,255,0.012) 3px, rgba(255,255,255,0.012) 4px),
-        repeating-linear-gradient(90deg,  transparent, transparent 3px, rgba(255,255,255,0.008) 3px, rgba(255,255,255,0.008) 4px);
-      pointer-events: none;
-    }
-    #textile::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-      background: linear-gradient(to right, transparent 0%, var(--gold-dim) 15%, var(--rust) 35%, transparent 50%, var(--gold-dim) 65%, var(--rust) 82%, transparent 100%);
-      opacity: 0.45;
-    }
-    .textile-inner { position: relative; z-index: 1; max-width: 680px; width: 100%; text-align: center; }
-    .textile-eyebrow {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.6vw,11px); letter-spacing: 0.45em; text-transform: uppercase;
-      color: var(--gold-dim); margin-bottom: clamp(20px,4vh,36px);
-      display: flex; align-items: center; gap: 14px;
-    }
-    .textile-eyebrow::before,.textile-eyebrow::after {
-      content: ''; flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(106,80,40,0.5));
-    }
-    .textile-eyebrow::after { background: linear-gradient(to left, transparent, rgba(106,80,40,0.5)); }
-    .textile-headline {
-      font-family: 'Pinyon Script', cursive; font-size: clamp(38px,9vw,66px);
-      color: var(--gold-dim); line-height: 1; margin-bottom: clamp(20px,4vh,36px);
-      -webkit-font-smoothing: antialiased; filter: contrast(1.05) brightness(0.9);
-      text-shadow: 0 0 30px rgba(106,80,40,0.2);
-    }
-    .textile-saying {
-      position: relative; margin: clamp(24px,5vh,44px) auto; max-width: 560px;
-      padding: clamp(24px,4vw,40px) clamp(20px,4vw,36px);
-      border: 1px solid rgba(106,80,40,0.25);
-      background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 50%), rgba(20,18,16,0.35);
-    }
-    .textile-saying::before,.textile-saying::after {
-      content: ''; position: absolute; width: 12px; height: 12px;
-      border-color: var(--gold-dim); border-style: solid; opacity: 0.55;
-    }
-    .textile-saying::before { top:-1px; left:-1px; border-width:1.5px 0 0 1.5px; }
-    .textile-saying::after  { bottom:-1px; right:-1px; border-width:0 1.5px 1.5px 0; }
-    .textile-quote-mark {
-      font-family: 'Pinyon Script', cursive; font-size: clamp(60px,14vw,100px);
-      color: var(--gold-dim); opacity: 0.2; line-height: 0.5; display: block;
-      margin-bottom: clamp(8px,2vh,14px); -webkit-font-smoothing: antialiased;
-    }
-    .textile-saying-text {
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(16px,3.2vw,22px); line-height: 1.75;
-      color: rgba(245,239,228,0.95); letter-spacing: 0.01em;
-    }
-    .textile-saying-text em { color: var(--gold-light); font-style: normal; }
-    .textile-attribution {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.6vw,10.5px); letter-spacing: 0.4em; text-transform: uppercase;
-      color: rgba(184,142,82,0.65); margin-top: clamp(14px,2.5vh,22px);
-    }
-    .textile-body {
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(14px,2.4vw,17px); line-height: 1.85;
-      color: rgba(245,239,228,0.75); text-align: center; margin-top: clamp(20px,4vh,32px);
-    }
-    .textile-body em { color: var(--gold-dim); font-style: normal; }
-    .textile-swatches {
-      display: flex; align-items: stretch; justify-content: center; gap: 0;
-      margin: clamp(28px,5vh,44px) auto 0; max-width: 480px; width: 100%;
-      height: clamp(6px,1.2vw,9px); border-radius: 2px; overflow: hidden;
-    }
-    .textile-swatch { flex: 1; position: relative; }
-    .ts1 { background: linear-gradient(to bottom, rgba(245,239,228,0.7), rgba(220,210,195,0.4)); }
-    .ts2 { background: linear-gradient(to bottom, rgba(184,142,82,0.6), rgba(158,116,56,0.35)); }
-    .ts3 { background: linear-gradient(to bottom, rgba(136,68,40,0.55), rgba(106,50,28,0.3)); }
-    .ts4 { background: linear-gradient(to bottom, rgba(92,72,120,0.5),  rgba(68,50,100,0.28)); }
-    .ts5 { background: linear-gradient(to bottom, rgba(34,102,88,0.5),  rgba(24,80,64,0.28)); }
-    .ts6 { background: linear-gradient(to bottom, rgba(160,80,96,0.5),  rgba(130,56,72,0.28)); }
-    .ts7 { background: linear-gradient(to bottom, rgba(100,90,80,0.55), rgba(72,64,56,0.35)); }
-    .textile-swatch-label { display: flex; justify-content: space-between; margin-top: 8px; max-width: 480px; width: 100%; }
-    .swatch-end {
-      font-family: 'Jost', sans-serif; font-weight: 200;
-      font-size: clamp(7px,1.4vw,8px); letter-spacing: 0.35em; text-transform: uppercase;
-      color: rgba(184,142,82,0.35);
-    }
-
-    /* RESERVE / FOOTER */
-    #reserve {
-      position: relative; z-index: 2; background: var(--parchment);
-      padding: clamp(64px,11vh,108px) clamp(24px,6vw,54px);
-      display: flex; flex-direction: column; align-items: center; overflow: hidden;
-    }
-    #reserve::before {
-      content: ''; position: absolute; inset: 0;
-      background-image:
-        radial-gradient(ellipse at 70% 20%, rgba(158,116,56,0.06) 0%, transparent 50%),
-        radial-gradient(ellipse at 20% 80%, rgba(136,68,40,0.05) 0%, transparent 45%);
-      pointer-events: none;
-    }
-    .reserve-inner { position: relative; z-index: 1; max-width: 680px; width: 100%; }
-    .reserve-eyebrow {
-      font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(9px,1.6vw,11px); letter-spacing: 0.45em; text-transform: uppercase;
-      color: var(--gold-dim); margin-bottom: clamp(14px,3vh,24px);
-      display: flex; align-items: center; gap: 14px;
-    }
-    .reserve-eyebrow::before,.reserve-eyebrow::after {
-      content:''; flex:1; height:1px;
-      background: linear-gradient(to right, transparent, rgba(184,150,90,0.4));
-    }
-    .reserve-eyebrow::after { background: linear-gradient(to left, transparent, rgba(184,150,90,0.4)); }
-    .reserve-headline {
-      font-family: 'Pinyon Script', cursive; font-size: clamp(44px,11vw,82px);
-      color: var(--ink); line-height: 1; text-align: center;
-      margin-bottom: clamp(8px,2vh,16px); -webkit-font-smoothing: antialiased;
-      text-shadow: 1px 1px 0 rgba(26,20,16,0.1);
-    }
-    .reserve-subhead {
-      font-family: 'Playfair Display', serif; font-style: italic;
-      font-size: clamp(14px,2.5vw,17px); color: var(--ink-mid); text-align: center;
-      line-height: 1.75; margin-bottom: clamp(28px,5vh,44px);
-    }
-    .reserve-subhead em { color: var(--copper); font-style: normal; }
-    .reserve-cta-wrap {
-      display: flex; flex-direction: column; align-items: center;
-      gap: clamp(12px,2vh,18px); margin-bottom: clamp(36px,6vh,56px);
-    }
-    .reserve-cta {
-      display: inline-block; font-family: 'Jost', sans-serif; font-weight: 300;
-      font-size: clamp(10px,1.8vw,12px); letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--parchment); background: var(--ink);
-      padding: clamp(13px,2.5vw,17px) clamp(28px,5vw,44px);
-      border: 1px solid rgba(184,150,90,0.35); text-decoration: none;
-      position: relative; transition: background 0.3s ease, color 0.3s ease; cursor: pointer;
-    }
-    .reserve-cta::before,.reserve-cta::after {
-      content:''; position:absolute; width:8px; height:8px;
-      border-color: var(--gold); border-style: solid; transition: all 0.25s ease;
-    }
-    .reserve-cta::before { top:-1px; left:-1px; border-width:1px 0 0 1px; }
-    .reserve-cta::after  { bottom:-1px; right:-1px; border-width:0 1px 1px 0; }
-    .reserve-cta:hover { background: var(--gold-dim); color: var(--parchment); }
-    .reserve-cta:hover::before,.reserve-cta:hover::after { width:12px; height:12px; }
-    .policy-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,190px), 1fr));
-      gap: clamp(14px,2.5vw,22px); margin-bottom: clamp(28px,5vh,44px);
-    }
-    .policy-pillar {
-      border: 1px solid rgba(184,150,90,0.22);
-      padding: clamp(18px,2.5vw,26px) clamp(14px,2vw,20px);
-      background: rgba(245,239,228,0.45); position: relative; text-align: center; overflow: hidden;
-    }
-    .policy-pillar::before {
-      content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
-      background: linear-gradient(to right, transparent, var(--gold-dim), transparent); opacity: 0.5;
-    }
-    .policy-pillar-icon { display: block; width: 36px; height: 36px; margin: 0 auto clamp(10px,2vh,14px); }
-    .policy-pillar-title { font-family: 'Playfair Display', serif; font-size: clamp(12px,2.2vw,14px); font-weight: 400; color: var(--ink); margin-bottom: 8px; letter-spacing: 0.04em; }
-    .policy-pillar-body { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(11.5px,1.9vw,12.5px); color: var(--ink-mid); line-height: 1.72; font-style: italic; }
-    .policy-pillar-body em { color: var(--copper); font-style: normal; font-weight: 400; }
-    .aftercare-block {
-      border: 1px solid rgba(184,150,90,0.35);
-      padding: clamp(20px,3.5vw,32px) clamp(18px,3.5vw,30px);
-      background: rgba(245,239,228,0.3); position: relative; margin-bottom: clamp(14px,3vh,24px);
-    }
-    .aftercare-block::before,.aftercare-block::after {
-      content:''; position:absolute; width:10px; height:10px; border-color: var(--gold); border-style: solid; opacity: 0.55;
-    }
-    .aftercare-block::before { top:-1px; left:-1px; border-width:1.5px 0 0 1.5px; }
-    .aftercare-block::after  { bottom:-1px; right:-1px; border-width:0 1.5px 1.5px 0; }
-    .aftercare-title { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(10px,1.7vw,11.5px); letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: clamp(12px,2vh,18px); }
-    .aftercare-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,160px), 1fr)); gap: clamp(10px,2vw,16px); }
-    .aftercare-item { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(11.5px,2vw,13px); color: var(--ink); line-height: 1.65; padding-left: 14px; position: relative; }
-    .aftercare-item::before { content:'—'; position:absolute; left:0; color: var(--gold); font-size: 10px; top: 2px; }
-    .aftercare-item strong { display: block; font-family: 'Playfair Display', serif; font-weight: 400; font-style: italic; font-size: clamp(12px,2.2vw,13.5px); color: var(--ink); margin-bottom: 3px; }
-
-    #footer {
-      position: relative; z-index: 2;
-      background: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.008) 4px, rgba(255,255,255,0.008) 5px), var(--soot);
-      border-top: 1px solid rgba(158,116,56,0.15);
-      padding: clamp(40px,7vh,64px) clamp(24px,6vw,48px);
-      display: flex; flex-direction: column; align-items: center;
-      gap: clamp(10px,2vh,16px); text-align: center;
-    }
-    .footer-script { font-family: 'Pinyon Script', cursive; font-size: clamp(36px,9vw,58px); color: var(--gold-dim); opacity: 0.65; -webkit-font-smoothing: antialiased; }
-    .footer-swatches { display: flex; align-items: center; justify-content: center; gap: 8px; }
-    .footer-swatch { width: clamp(10px,2vw,14px); height: clamp(10px,2vw,14px); border-radius: 50%; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-    .footer-address { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(12px,2.2vw,14.5px); color: rgba(245,239,228,0.6); letter-spacing: 0.06em; }
-    .footer-tag { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(9px,1.5vw,10.5px); letter-spacing: 0.38em; text-transform: uppercase; color: rgba(245,239,228,0.42); margin-top: 6px; }
-    .footer-davines { font-family: 'Jost', sans-serif; font-weight: 300; font-size: clamp(10px,2vw,12px); letter-spacing: 0.18em; color: rgba(245,239,228,0.55); display: flex; align-items: center; justify-content: center; gap: 0.55em; flex-wrap: wrap; }
-    .davines-wordmark { font-family: 'Josefin Sans', sans-serif; font-weight: 300; font-size: clamp(12px,2.4vw,15px); letter-spacing: 0.32em; color: rgba(184,150,90,0.75); text-transform: uppercase; }
-
-    #cover { background-image: radial-gradient(ellipse at 30% 20%, rgba(122,56,32,0.06) 0%, transparent 55%), radial-gradient(ellipse at 75% 80%, rgba(34,102,88,0.05) 0%, transparent 50%); }
-    #light { background-image: radial-gradient(ellipse at 60% 40%, rgba(158,116,56,0.07) 0%, transparent 50%), repeating-linear-gradient(180deg, transparent, transparent 60px, rgba(0,0,0,0.025) 60px, rgba(0,0,0,0.025) 61px) !important; }
-
-    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
-  </style>
+/* Responsive */
+@media(max-width:720px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .section-wrap{padding:5rem 1.8rem;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .light-grid{grid-template-columns:1fr;}
+  .booking-grid{grid-template-columns:1fr;}
+  .aftercare-grid{grid-template-columns:1fr;}
+  .service-item{flex-direction:column;gap:0.2rem;}
+  .booking-ctas{flex-direction:column;align-items:center;}
+}
+</style>
 </head>
 <body>
 
-<canvas id="texture"></canvas>
-<div class="bleeds">
-  <div class="bleed b1"></div><div class="bleed b2"></div>
-  <div class="bleed b3"></div><div class="bleed b4"></div>
-  <div class="bleed b5"></div>
+<nav>
+  <a href="#hero" class="nav-logo">Persona</a>
+  <ul class="nav-links">
+    <li><a href="#artisan">Artisan</a></li>
+    <li><a href="#light">Philosophy</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#booking">Reserve</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="whorl-1"></div>
+  <div class="whorl-2"></div>
+  <div class="komo"></div>
+  <p class="hero-eyebrow">Fort Bragg, California &nbsp;·&nbsp; By Appointment</p>
+  <h1 class="hero-title">Persona</h1>
+  <p class="hero-sub">Hair Colour Atelier</p>
+  <div class="hero-rule"></div>
+  <p class="hero-tagline">Bespoke colour crafted for you</p>
+  <div class="hero-cta"><a href="#artisan" class="btn">Discover</a></div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- LARGE DISCHARGE OVAL DIVIDER -->
+<div style="background:var(--parchment);display:flex;justify-content:center;padding:0.5rem 0 1rem;">
+<svg width="400" height="68" viewBox="0 0 400 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <line x1="0" y1="34" x2="50" y2="34" stroke="#7a98aa" stroke-width="1.2"/>
+  <line x1="350" y1="34" x2="400" y2="34" stroke="#7a98aa" stroke-width="1.2"/>
+  <circle cx="46" cy="34" r="8" fill="#4a6270"/><circle cx="46" cy="34" r="4" fill="#2a3a44"/>
+  <circle cx="354" cy="34" r="8" fill="#4a6270"/><circle cx="354" cy="34" r="4" fill="#2a3a44"/>
+  <rect x="60" y="6" width="280" height="56" rx="28" stroke="#aabfcc" stroke-width="1"/>
+  <rect x="72" y="16" width="256" height="36" rx="18" stroke="#7a98aa" stroke-width="1.5"/>
+  <g transform="translate(200,34)">
+    <line x1="0" y1="-11" x2="0" y2="-22" stroke="#af8430" stroke-width="1.3"/>
+    <line x1="0" y1="11" x2="0" y2="22" stroke="#af8430" stroke-width="1.3"/>
+    <line x1="-11" y1="0" x2="-24" y2="0" stroke="#af8430" stroke-width="1.3"/>
+    <line x1="11" y1="0" x2="24" y2="0" stroke="#af8430" stroke-width="1.3"/>
+    <line x1="-7.8" y1="-7.8" x2="-15.5" y2="-15.5" stroke="#c8a558" stroke-width="1" opacity="0.8"/>
+    <line x1="7.8" y1="-7.8" x2="15.5" y2="-15.5" stroke="#c8a558" stroke-width="1" opacity="0.8"/>
+    <line x1="-7.8" y1="7.8" x2="-15.5" y2="15.5" stroke="#c8a558" stroke-width="1" opacity="0.8"/>
+    <line x1="7.8" y1="7.8" x2="15.5" y2="15.5" stroke="#c8a558" stroke-width="1" opacity="0.8"/>
+    <line x1="-4" y1="-10.5" x2="-8" y2="-21" stroke="#c8a558" stroke-width="0.8" opacity="0.5"/>
+    <line x1="4" y1="-10.5" x2="8" y2="-21" stroke="#c8a558" stroke-width="0.8" opacity="0.5"/>
+    <line x1="-4" y1="10.5" x2="-8" y2="21" stroke="#c8a558" stroke-width="0.8" opacity="0.5"/>
+    <line x1="4" y1="10.5" x2="8" y2="21" stroke="#c8a558" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="0" cy="0" r="7" fill="#af8430"/><circle cx="0" cy="0" r="3.2" fill="#e8d090"/>
+  </g>
+  <path d="M 222 20 Q 240 34 222 48" stroke="#d68870" stroke-width="1.3" fill="none"/>
+  <path d="M 232 14 Q 254 34 232 54" stroke="#d68870" stroke-width="0.9" fill="none" opacity="0.55"/>
+  <path d="M 242 8 Q 268 34 242 60" stroke="#d68870" stroke-width="0.6" fill="none" opacity="0.3"/>
+  <polygon points="200,6 204,10 200,14 196,10" fill="#9b7228" opacity="0.7"/>
+  <polygon points="200,54 204,58 200,62 196,58" fill="#9b7228" opacity="0.7"/>
+  <polygon points="162,34 166,38 162,42 158,38" fill="#aabfcc" opacity="0.5"/>
+  <polygon points="238,34 242,38 238,42 234,38" fill="#aabfcc" opacity="0.5"/>
+</svg>
 </div>
 
-<div class="corner tl"><svg viewBox="0 0 44 44" fill="none"><path d="M2 22 Q2 2 22 2" stroke="#B8965A" stroke-width="0.8" fill="none" opacity="0.6"/><path d="M2 12 Q2 2 12 2" stroke="#B8965A" stroke-width="1.2" fill="none" opacity="0.9"/><circle cx="2" cy="2" r="1.5" fill="#B8965A" opacity="0.7"/><line x1="22" y1="2" x2="28" y2="2" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/><line x1="2" y1="22" x2="2" y2="28" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/></svg></div>
-<div class="corner tr"><svg viewBox="0 0 44 44" fill="none"><path d="M2 22 Q2 2 22 2" stroke="#B8965A" stroke-width="0.8" fill="none" opacity="0.6"/><path d="M2 12 Q2 2 12 2" stroke="#B8965A" stroke-width="1.2" fill="none" opacity="0.9"/><circle cx="2" cy="2" r="1.5" fill="#B8965A" opacity="0.7"/><line x1="22" y1="2" x2="28" y2="2" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/><line x1="2" y1="22" x2="2" y2="28" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/></svg></div>
-<div class="corner bl"><svg viewBox="0 0 44 44" fill="none"><path d="M2 22 Q2 2 22 2" stroke="#B8965A" stroke-width="0.8" fill="none" opacity="0.6"/><path d="M2 12 Q2 2 12 2" stroke="#B8965A" stroke-width="1.2" fill="none" opacity="0.9"/><circle cx="2" cy="2" r="1.5" fill="#B8965A" opacity="0.7"/><line x1="22" y1="2" x2="28" y2="2" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/><line x1="2" y1="22" x2="2" y2="28" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/></svg></div>
-<div class="corner br"><svg viewBox="0 0 44 44" fill="none"><path d="M2 22 Q2 2 22 2" stroke="#B8965A" stroke-width="0.8" fill="none" opacity="0.6"/><path d="M2 12 Q2 2 12 2" stroke="#B8965A" stroke-width="1.2" fill="none" opacity="0.9"/><circle cx="2" cy="2" r="1.5" fill="#B8965A" opacity="0.7"/><line x1="22" y1="2" x2="28" y2="2" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/><line x1="2" y1="22" x2="2" y2="28" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/></svg></div>
-
-<!-- COVER -->
-<section id="cover">
-  <div class="stage">
-    <svg class="flourish-top" viewBox="0 0 420 60" fill="none">
-      <line x1="210" y1="52" x2="210" y2="30" stroke="#B8965A" stroke-width="0.8" opacity="0.7"/>
-      <path d="M210 38 C190 20,140 10,80 18 C50 22,20 32,8 28" stroke="#1A1410" stroke-width="1.1" fill="none" opacity="0.5"/>
-      <path d="M210 38 C230 20,280 10,340 18 C370 22,400 32,412 28" stroke="#1A1410" stroke-width="1.1" fill="none" opacity="0.5"/>
-      <path d="M210 42 C195 30,160 22,120 28 C100 31,76 38,60 34" stroke="#B8965A" stroke-width="0.7" fill="none" opacity="0.6"/>
-      <path d="M210 42 C225 30,260 22,300 28 C320 31,344 38,360 34" stroke="#B8965A" stroke-width="0.7" fill="none" opacity="0.6"/>
-      <ellipse cx="60" cy="32" rx="8" ry="3" fill="#B8965A" opacity="0.35" transform="rotate(-20,60,32)"/>
-      <ellipse cx="360" cy="32" rx="8" ry="3" fill="#B8965A" opacity="0.35" transform="rotate(20,360,32)"/>
-      <rect x="207" y="27" width="6" height="6" fill="#B8965A" opacity="0.8" transform="rotate(45,210,30)"/>
-      <circle cx="120" cy="27" r="1.5" fill="#B8965A" opacity="0.5"/>
-      <circle cx="300" cy="27" r="1.5" fill="#B8965A" opacity="0.5"/>
-    </svg>
-
-    <div style="position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;">
-      <div class="corona-ring" style="width:340px;height:340px;top:50%;left:50%;animation-delay:0s;"></div>
-      <div class="corona-ring" style="width:520px;height:520px;top:50%;left:50%;animation-delay:1.4s;opacity:0.1;"></div>
-      <div class="corona-ring" style="width:700px;height:700px;top:50%;left:50%;animation-delay:2.8s;opacity:0.07;"></div>
-      <svg style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0.04;" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" fill="none">
-        <path d="M400 300 C320 180,180 140,80 180" stroke="#C8831A" stroke-width="1.2"/>
-        <path d="M400 300 C480 180,620 140,720 180" stroke="#C8831A" stroke-width="1.2"/>
-        <path d="M400 300 C300 200,160 180,60 220" stroke="#B8965A" stroke-width="0.8"/>
-        <path d="M400 300 C500 200,640 180,740 220" stroke="#B8965A" stroke-width="0.8"/>
-        <circle cx="400" cy="300" r="12" fill="#C8831A" opacity="0.4"/>
-        <circle cx="400" cy="300" r="6"  fill="#C8831A" opacity="0.7"/>
-      </svg>
-    </div>
-
-    <div class="eyebrow">Colour &nbsp;·&nbsp; Atelier &nbsp;·&nbsp; Fort Bragg</div>
-
-    <div class="script-wrap">
-      <span class="script-word">Persona</span>
-      <div class="colour-bar"></div>
-    </div>
-
-    <div class="subtitle">Hair Colour Atelier</div>
-
-    <div class="swatches">
-      <div class="swatch-line"></div>
-      <div class="swatch s1"></div><div class="swatch s2"></div><div class="swatch s3"></div>
-      <div class="swatch s4"></div><div class="swatch s5"></div><div class="swatch s6"></div>
-      <div class="swatch-line"></div>
-    </div>
-
-    <svg class="flourish-bottom" viewBox="0 0 420 55" fill="none">
-      <line x1="210" y1="3" x2="210" y2="22" stroke="#B8965A" stroke-width="0.8" opacity="0.7"/>
-      <path d="M210 16 C190 34,140 44,80 36 C50 32,20 22,8 26" stroke="#1A1410" stroke-width="1.1" fill="none" opacity="0.5"/>
-      <path d="M210 16 C230 34,280 44,340 36 C370 32,400 22,412 26" stroke="#1A1410" stroke-width="1.1" fill="none" opacity="0.5"/>
-      <path d="M210 12 C195 24,160 32,120 26 C100 23,76 16,60 20" stroke="#B8965A" stroke-width="0.7" fill="none" opacity="0.6"/>
-      <path d="M210 12 C225 24,260 32,300 26 C320 23,344 16,360 20" stroke="#B8965A" stroke-width="0.7" fill="none" opacity="0.6"/>
-      <ellipse cx="60" cy="22" rx="8" ry="3" fill="#B8965A" opacity="0.35" transform="rotate(20,60,22)"/>
-      <ellipse cx="360" cy="22" rx="8" ry="3" fill="#B8965A" opacity="0.35" transform="rotate(-20,360,22)"/>
-      <rect x="207" y="24" width="6" height="6" fill="#B8965A" opacity="0.8" transform="rotate(45,210,27)"/>
-      <circle cx="120" cy="27" r="1.5" fill="#B8965A" opacity="0.5"/>
-      <circle cx="300" cy="27" r="1.5" fill="#B8965A" opacity="0.5"/>
-    </svg>
-
-    <div class="tagline">Bespoke colour crafted for you</div>
-
-    <div class="scroll-cue" onclick="document.getElementById('bio').scrollIntoView({behavior:'smooth'})">
-      <span class="scroll-cue-label">Discover</span>
-      <div class="scroll-cue-arrow"></div>
+<!-- ARTISAN -->
+<div id="artisan">
+  <div class="section-wrap">
+    <p class="section-label">The Artisan</p>
+    <h2 class="section-title">The Hand Behind the Colour</h2>
+    <p>With <em>30+ years</em> of craft refined across some of California's most distinguished salons, Persona was born from a singular conviction — that exceptional colour is not a service, but a collaboration. Each appointment is a careful study of light, tone, texture, and you.</p>
+    <p>Over the course of that career, a calling to teach emerged — leading to years spent educating fellow colourists through <em>Toni &amp; Guy, L'Oréal,</em> and <em>Aveda</em>, three of the industry's most exacting institutions. This atelier brings that same depth of knowledge directly to the Mendocino Coast.</p>
+    <p>Now rooted in <em>Fort Bragg, California</em>, Persona offers the intimacy of an independent studio with the precision of a career built at the highest level of the craft.</p>
+    <p>The pursuit of mastery has never been a destination — it is a practice. A deep commitment to <em>continued learning</em> has shaped every decade of this career, from seeking out the industry's most rigorous education to staying genuinely curious about what comes next. <em>Teaching and learning</em> have always been two sides of the same conversation, and that conversation never ends.</p>
+    <div class="stats">
+      <div><span class="stat-num">30+</span><span class="stat-label">Years of Craft</span></div>
+      <div><span class="stat-num">1</span><span class="stat-label">Independent Atelier</span></div>
+      <div><span class="stat-num">∞</span><span class="stat-label">An Eye for Light</span></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- BIO -->
-<section id="bio">
-  <div class="bio-inner">
-    <div class="bio-eyebrow">The Artisan</div>
-    <div class="bio-headline">The Hand Behind the Colour</div>
-    <div class="bio-rule"></div>
-    <p class="bio-body">
-      With <em>30+ years</em> of craft refined across some of California's most distinguished salons,
-      Persona was born from a singular conviction — that exceptional colour is not a service,
-      but a collaboration. Each appointment is a careful study of light, tone, texture,
-      and you. Over the course of that career, a calling to teach emerged — leading to years
-      spent educating fellow colourists through <em>Toni &amp; Guy, L'Oréal,</em> and <em>Aveda</em>,
-      three of the industry's most exacting institutions. This atelier brings that same
-      depth of knowledge directly to the Mendocino Coast.
-    </p>
-    <p class="bio-body" style="font-size: clamp(13px,2.4vw,16px); margin-top: -8px;">
-      Now rooted in <em>Fort Bragg, California</em>, Persona offers the intimacy of an
-      independent studio with the precision of a career built at the highest level of the craft.
-    </p>
-    <p class="bio-body" style="font-size: clamp(13px,2.4vw,16px); margin-top: clamp(16px,3vh,28px); padding-top: clamp(16px,3vh,24px); border-top: 1px solid rgba(184,150,90,0.18);">
-      The pursuit of mastery has never been a destination — it is a practice. A deep commitment
-      to <em>continued learning</em> has shaped every decade of this career, from seeking out the
-      industry's most rigorous education to staying genuinely curious about what comes next.
-      <em>Teaching and learning</em> have always been two sides of the same conversation, and that conversation never ends.
-    </p>
-    <div class="bio-credentials">
-      <div class="credential">
-        <span class="credential-number">30+</span>
-        <span class="credential-label">Years of Craft</span>
+<!-- MINI GLYPH -->
+<div style="background:var(--parchment);display:flex;justify-content:center;padding:0.2rem 0;">
+<svg width="160" height="26" viewBox="0 0 160 26" fill="none">
+  <line x1="0" y1="13" x2="20" y2="13" stroke="#7a98aa" stroke-width="1"/>
+  <line x1="140" y1="13" x2="160" y2="13" stroke="#7a98aa" stroke-width="1"/>
+  <circle cx="18" cy="13" r="4" fill="#4a6270"/>
+  <circle cx="142" cy="13" r="4" fill="#4a6270"/>
+  <rect x="26" y="2" width="108" height="22" rx="11" stroke="#aabfcc" stroke-width="1"/>
+  <rect x="34" y="7" width="92" height="12" rx="6" stroke="#7a98aa" stroke-width="1"/>
+  <circle cx="80" cy="13" r="4" fill="#af8430"/>
+  <circle cx="80" cy="13" r="1.8" fill="#e8d090"/>
+  <path d="M 90 7 Q 100 13 90 19" stroke="#d68870" stroke-width="0.9" fill="none" opacity="0.7"/>
+  <polygon points="80,2 83,5 80,8 77,5" fill="#9b7228" opacity="0.6"/>
+  <polygon points="80,18 83,21 80,24 77,21" fill="#9b7228" opacity="0.6"/>
+</svg>
+</div>
+
+<!-- WHERE LIGHT LIVES -->
+<div id="light" class="whorl-bg">
+  <div class="section-wrap">
+    <p class="section-label">Where Light Lives</p>
+    <h2 class="section-title">Before the first foil is placed,<br>there is observation.</h2>
+    <p>The way morning light falls through a north-facing window. The way artificial light flattens what natural light reveals. This attunement to light is the signature that has defined this practice for <strong style="color:var(--ink);">thirty-seven years.</strong></p>
+    <p style="color:var(--ink-mid);font-size:1rem;margin-top:1rem;">Colour that only performs under a salon's LED deserves more. Every formulation here is considered against the full spectrum of light your life actually moves through — <em>sun, shadow, candlelight, cloud.</em></p>
+    <div class="light-grid">
+      <div class="light-card">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" style="margin-bottom:.7rem;display:block;">
+          <circle cx="13" cy="13" r="3.8" fill="#af8430"/><circle cx="13" cy="13" r="1.7" fill="#e8d090"/>
+          <line x1="13" y1="0" x2="13" y2="5.5" stroke="#c8a558" stroke-width="1"/>
+          <line x1="13" y1="20.5" x2="13" y2="26" stroke="#c8a558" stroke-width="1"/>
+          <line x1="0" y1="13" x2="5.5" y2="13" stroke="#c8a558" stroke-width="1"/>
+          <line x1="20.5" y1="13" x2="26" y2="13" stroke="#c8a558" stroke-width="1"/>
+          <line x1="3.8" y1="3.8" x2="7.9" y2="7.9" stroke="#c8a558" stroke-width=".8" opacity=".6"/>
+          <line x1="18.1" y1="3.8" x2="22.2" y2="7.9" stroke="#c8a558" stroke-width=".8" opacity=".6" transform="scale(-1,1) translate(-26,0)"/>
+          <line x1="3.8" y1="22.2" x2="7.9" y2="18.1" stroke="#c8a558" stroke-width=".8" opacity=".6"/>
+          <line x1="18.1" y1="22.2" x2="22.2" y2="18.1" stroke="#c8a558" stroke-width=".8" opacity=".6" transform="scale(-1,1) translate(-26,0)"/>
+        </svg>
+        <h3>Natural Light</h3>
+        <p>The Mendocino Coast offers a quality of diffused coastal light that is among the most honest in the world. Colour is read here first.</p>
       </div>
-      <div class="credential">
-        <span class="credential-number" style="font-size:clamp(18px,4vw,28px); padding-top:6px;">Independent</span>
-        <span class="credential-label">Atelier Studio</span>
+      <div class="light-card">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" style="margin-bottom:.7rem;display:block;">
+          <circle cx="13" cy="13" r="3.8" fill="#7a98aa"/><circle cx="13" cy="13" r="1.7" fill="#d0e0e8"/>
+          <line x1="13" y1="0" x2="13" y2="5.5" stroke="#aabfcc" stroke-width="1"/>
+          <line x1="13" y1="20.5" x2="13" y2="26" stroke="#aabfcc" stroke-width="1"/>
+          <line x1="0" y1="13" x2="5.5" y2="13" stroke="#aabfcc" stroke-width="1"/>
+          <line x1="20.5" y1="13" x2="26" y2="13" stroke="#aabfcc" stroke-width="1"/>
+          <path d="M 18 7 Q 23 13 18 19" stroke="#d68870" stroke-width=".9" fill="none" opacity=".7"/>
+          <path d="M 21 4 Q 27 13 21 22" stroke="#d68870" stroke-width=".6" fill="none" opacity=".4"/>
+        </svg>
+        <h3>Artificial Light</h3>
+        <p>Warm incandescent, cold LED, candlelight — each shifts tone. The formulation must hold beauty across all of them.</p>
+      </div>
+      <div class="light-card">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" style="margin-bottom:.7rem;display:block;">
+          <circle cx="13" cy="13" r="3.8" fill="#c45a48"/><circle cx="13" cy="13" r="1.7" fill="#f0c0b0"/>
+          <line x1="13" y1="0" x2="13" y2="5.5" stroke="#d68870" stroke-width="1"/>
+          <line x1="13" y1="20.5" x2="13" y2="26" stroke="#d68870" stroke-width="1"/>
+          <line x1="0" y1="13" x2="5.5" y2="13" stroke="#d68870" stroke-width="1"/>
+          <line x1="20.5" y1="13" x2="26" y2="13" stroke="#d68870" stroke-width="1"/>
+          <line x1="3.8" y1="3.8" x2="7.9" y2="7.9" stroke="#d68870" stroke-width=".8" opacity=".5"/>
+          <line x1="22.2" y1="3.8" x2="18.1" y2="7.9" stroke="#d68870" stroke-width=".8" opacity=".5"/>
+          <line x1="3.8" y1="22.2" x2="7.9" y2="18.1" stroke="#d68870" stroke-width=".8" opacity=".5"/>
+          <line x1="22.2" y1="22.2" x2="18.1" y2="18.1" stroke="#d68870" stroke-width=".8" opacity=".5"/>
+        </svg>
+        <h3>The Shift</h3>
+        <p>Great colour is alive. It changes with the hour, the season, the room. That movement is not a flaw — it is the whole point.</p>
       </div>
     </div>
   </div>
-</section>
-
-<!-- LIGHT -->
-<section id="light">
-  <svg class="field-bg" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" fill="none">
-    <rect x="60" y="60" width="300" height="100" rx="50" stroke="#B8965A" stroke-width="1"/>
-    <rect x="440" y="60" width="300" height="100" rx="50" stroke="#B8965A" stroke-width="1"/>
-    <circle cx="140" cy="110" r="8" stroke="#1A1410" stroke-width="1" fill="rgba(200,131,26,0.15)"/>
-    <circle cx="280" cy="110" r="8" stroke="#1A1410" stroke-width="1" fill="none"/>
-    <circle cx="520" cy="110" r="8" stroke="#1A1410" stroke-width="1" fill="rgba(200,131,26,0.15)"/>
-    <circle cx="660" cy="110" r="8" stroke="#1A1410" stroke-width="1" fill="none"/>
-  </svg>
-  <div class="light-inner">
-    <div class="light-eyebrow">An Eye for Light</div>
-    <svg class="discharge-centrepiece" viewBox="0 0 480 180" fill="none">
-      <circle cx="100" cy="90" r="22" stroke="#C8831A" stroke-width="0.8" opacity="0.35"/>
-      <circle cx="100" cy="90" r="14" stroke="#C8831A" stroke-width="0.7" opacity="0.5" fill="rgba(200,131,26,0.08)"/>
-      <circle cx="100" cy="90" r="7" fill="#C8831A" opacity="0.7"/>
-      <circle cx="380" cy="90" r="14" stroke="#3A3530" stroke-width="0.8" opacity="0.4" fill="none"/>
-      <circle cx="380" cy="90" r="7" fill="#3A3530" opacity="0.35"/>
-      <line x1="20" y1="90" x2="86" y2="90" stroke="#3A3530" stroke-width="1.2" opacity="0.5"/>
-      <line x1="394" y1="90" x2="460" y2="90" stroke="#3A3530" stroke-width="1.2" opacity="0.5"/>
-      <path d="M114 90 C180 50,260 44,366 80" stroke="#C8831A" stroke-width="0.9" opacity="0.7"/>
-      <path d="M114 90 C180 90,280 90,366 90" stroke="#B8965A" stroke-width="0.6" opacity="0.4" stroke-dasharray="3 4"/>
-      <path d="M114 90 C180 130,260 136,366 100" stroke="#C8831A" stroke-width="0.9" opacity="0.7"/>
-      <rect x="10" y="28" width="460" height="124" rx="62" stroke="#B8965A" stroke-width="0.6" opacity="0.18"/>
-    </svg>
-    <h2 class="light-headline">Where Light Lives</h2>
-    <p class="light-body">
-      Before the first foil is placed, there is observation. The way morning light
-      falls through a north-facing window. The way <em>artificial light flattens</em> what natural light
-      reveals. This attunement to light is the signature that has defined this practice
-      for <em>thirty-seven years.</em>
-    </p>
-    <p class="light-body" style="font-size:clamp(13px,2.4vw,16px);">
-      Colour that only performs under a salon's LED deserves more.
-      Every formulation here is considered against the full spectrum of light
-      your life actually moves through — <em>sun, shadow, candlelight, cloud.</em>
-    </p>
-    <div class="light-tiles">
-      <div class="light-tile">
-        <svg class="light-tile-icon" viewBox="0 0 48 48" fill="none">
-          <circle cx="24" cy="24" r="8" fill="#C8831A" opacity="0.75"/>
-          <circle cx="24" cy="24" r="13" stroke="#C8831A" stroke-width="0.7" opacity="0.4"/>
-          <line x1="24" y1="2" x2="24" y2="8" stroke="#C8831A" stroke-width="0.8" opacity="0.6"/>
-          <line x1="24" y1="40" x2="24" y2="46" stroke="#C8831A" stroke-width="0.8" opacity="0.6"/>
-          <line x1="2" y1="24" x2="8" y2="24" stroke="#C8831A" stroke-width="0.8" opacity="0.6"/>
-          <line x1="40" y1="24" x2="46" y2="24" stroke="#C8831A" stroke-width="0.8" opacity="0.6"/>
-        </svg>
-        <div class="light-tile-title">Natural Light</div>
-        <div class="light-tile-body">The Mendocino Coast offers a quality of diffused coastal light that is among the most honest in the world. Colour is read here first.</div>
-      </div>
-      <div class="light-tile">
-        <svg class="light-tile-icon" viewBox="0 0 48 48" fill="none">
-          <circle cx="10" cy="24" r="5" fill="#C8831A" opacity="0.7"/>
-          <circle cx="38" cy="24" r="5" stroke="#3A3530" stroke-width="0.8" opacity="0.45" fill="none"/>
-          <path d="M15 24 C22 14,30 14,33 20" stroke="#C8831A" stroke-width="0.8" opacity="0.7"/>
-          <path d="M15 24 C22 24,30 24,33 24" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/>
-          <path d="M15 24 C22 34,30 34,33 28" stroke="#C8831A" stroke-width="0.8" opacity="0.7"/>
-        </svg>
-        <div class="light-tile-title">Artificial Light</div>
-        <div class="light-tile-body">Warm incandescent, cold LED, candlelight — each shifts tone. The formulation must hold beauty across all of them.</div>
-      </div>
-      <div class="light-tile">
-        <svg class="light-tile-icon" viewBox="0 0 48 48" fill="none">
-          <circle cx="16" cy="24" r="6" fill="#C8831A" opacity="0.65"/>
-          <path d="M22 24 C25 18,28 18,30 20" stroke="#C8831A" stroke-width="1" opacity="0.75"/>
-          <path d="M22 24 C25 30,28 30,30 28" stroke="#C8831A" stroke-width="1" opacity="0.75"/>
-          <path d="M30 20 C34 16,38 16,40 18" stroke="#B8965A" stroke-width="0.7" opacity="0.5"/>
-          <path d="M30 28 C34 32,38 32,40 30" stroke="#B8965A" stroke-width="0.7" opacity="0.5"/>
-        </svg>
-        <div class="light-tile-title">The Shift</div>
-        <div class="light-tile-body">Great colour is alive. It changes with the hour, the season, the room. That movement is not a flaw — it is the whole point.</div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
 <!-- TEXTILE -->
-<section id="textile">
-  <div class="textile-inner">
-    <div class="textile-eyebrow">The Hand That Reads Hair</div>
-    <div class="textile-headline">Hair as Textile</div>
-    <div class="textile-saying">
-      <span class="textile-quote-mark">"</span>
-      <p class="textile-saying-text">
-        Your hair is like a <em>fine washable</em> —<br>
-        don't wash it in <em>hot</em>,<br>
-        and don't wash it <em>a lot</em>.
-      </p>
-      <div class="textile-attribution">A Persona philosophy · on the care of colour</div>
+<div id="textile" class="whorl-bg">
+  <div class="section-wrap">
+    <p class="section-label">The Hand That Reads Hair</p>
+    <h2 class="section-title">Hair as Textile</h2>
+    <div class="pullquote">
+      <p>Your hair is like a <em>fine washable</em> —<br>don't wash it in <em>hot</em>,<br>and don't wash it <em>a lot</em>.</p>
+      <cite>A Persona philosophy · on the care of colour</cite>
     </div>
-    <p class="textile-body">
-      Over thirty years of working with hair has taught one enduring truth —
-      that hair, like fabric, has a hand. <em>Silk</em> and <em>cashmere</em> demand
-      cool water and rare laundering. <em>Linen</em> softens with age and gentle use.
-      <em>Wool</em> felts under heat and friction. Your hair is no different.
-    </p>
-    <div class="textile-swatches">
-      <div class="textile-swatch ts1"></div><div class="textile-swatch ts2"></div>
-      <div class="textile-swatch ts3"></div><div class="textile-swatch ts4"></div>
-      <div class="textile-swatch ts5"></div><div class="textile-swatch ts6"></div>
-      <div class="textile-swatch ts7"></div>
-    </div>
-    <div class="textile-swatch-label">
-      <span class="swatch-end">Silk</span>
-      <span class="swatch-end">Wool</span>
+    <p>Over thirty years of working with hair has taught one enduring truth — that hair, like fabric, has a hand. <em>Silk</em> and <em>cashmere</em> demand cool water and rare laundering. <em>Linen</em> softens with age and gentle use. <em>Wool</em> felts under heat and friction. Your hair is no different.</p>
+    <div class="fabric-row">
+      <span class="fabric-tag">Silk</span><span class="fabric-tag">Cashmere</span><span class="fabric-tag">Linen</span><span class="fabric-tag">Wool</span>
     </div>
   </div>
-</section>
+</div>
 
-<!-- MENU -->
-<section id="menu">
-  <div class="menu-inner">
+<!-- DARK GLYPH BRIDGE INTO SERVICES -->
+<div style="background:var(--ink);display:flex;justify-content:center;padding:2.5rem 0 0;">
+<svg width="300" height="74" viewBox="0 0 300 74" fill="none">
+  <rect x="28" y="7" width="244" height="60" rx="30" stroke="rgba(122,152,170,0.3)" stroke-width="1"/>
+  <rect x="38" y="15" width="224" height="44" rx="22" stroke="rgba(122,152,170,0.5)" stroke-width="1.2"/>
+  <line x1="0" y1="37" x2="38" y2="37" stroke="#4a6270" stroke-width="1.5"/>
+  <line x1="262" y1="37" x2="300" y2="37" stroke="#4a6270" stroke-width="1.5"/>
+  <circle cx="34" cy="37" r="6" fill="#4a6270"/>
+  <circle cx="266" cy="37" r="6" fill="#4a6270"/>
+  <g transform="translate(150,37)">
+    <line x1="0" y1="-11" x2="0" y2="-22" stroke="#af8430" stroke-width="1.2"/>
+    <line x1="0" y1="11" x2="0" y2="22" stroke="#af8430" stroke-width="1.2"/>
+    <line x1="-11" y1="0" x2="-24" y2="0" stroke="#af8430" stroke-width="1.2"/>
+    <line x1="11" y1="0" x2="24" y2="0" stroke="#af8430" stroke-width="1.2"/>
+    <line x1="-7.8" y1="-7.8" x2="-15" y2="-15" stroke="#c8a558" stroke-width="1" opacity=".75"/>
+    <line x1="7.8" y1="-7.8" x2="15" y2="-15" stroke="#c8a558" stroke-width="1" opacity=".75"/>
+    <line x1="-7.8" y1="7.8" x2="-15" y2="15" stroke="#c8a558" stroke-width="1" opacity=".75"/>
+    <line x1="7.8" y1="7.8" x2="15" y2="15" stroke="#c8a558" stroke-width="1" opacity=".75"/>
+    <circle cx="0" cy="0" r="6.5" fill="#af8430"/><circle cx="0" cy="0" r="3" fill="#e8d090"/>
+  </g>
+  <path d="M 167 22 Q 182 37 167 52" stroke="#d68870" stroke-width="1.2" fill="none" opacity=".8"/>
+  <path d="M 177 15 Q 196 37 177 59" stroke="#d68870" stroke-width=".8" fill="none" opacity=".5"/>
+  <polygon points="150,7 154,11 150,15 146,11" fill="#9b7228" opacity=".7"/>
+  <polygon points="150,59 154,63 150,67 146,63" fill="#9b7228" opacity=".7"/>
+</svg>
+</div>
 
-    <div class="menu-header">
-      <svg style="width:100%;max-width:520px;margin-bottom:-4px;" viewBox="0 0 520 52" fill="none">
-        <line x1="260" y1="46" x2="260" y2="28" stroke="#B8965A" stroke-width="0.8" opacity="0.7"/>
-        <path d="M260 34 C240 18,185 8,110 16 C72 20,32 30,10 26" stroke="#1A1410" stroke-width="1" fill="none" opacity="0.45"/>
-        <path d="M260 34 C280 18,335 8,410 16 C448 20,488 30,510 26" stroke="#1A1410" stroke-width="1" fill="none" opacity="0.45"/>
-        <rect x="257" y="24" width="6" height="6" fill="#B8965A" opacity="0.75" transform="rotate(45,260,27)"/>
-      </svg>
-      <div class="menu-headline">Colour Services</div>
-      <div class="menu-title">Persona</div>
-      <div class="menu-colour-bar"></div>
+<!-- SERVICES -->
+<div id="services" class="whorl-bg">
+  <div class="section-wrap wide">
+    <p class="section-label">Colour Services</p>
+    <h2 class="section-title">Persona Colour</h2>
+    <div class="rule"><div class="rule-diamond"></div></div>
+
+    <div class="service-group">
+      <p class="service-group-title">Root &amp; All Over</p>
+      <div class="service-item"><span class="service-name">Root Touch Up</span><span class="service-price">$75 +</span></div>
+      <div class="service-item"><span class="service-name">All Over Colour</span><span class="service-price">$110 +</span></div>
     </div>
 
-    <!-- COLOUR -->
-    <div class="menu-section">
-      <div class="section-label">Colour</div>
-
-      <div class="menu-item">
-        <div class="item-left"><span class="item-name">Root Touch Up</span></div>
-        <span class="item-dots"></span><span class="item-price">$75 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left"><span class="item-name">All Over Colour</span></div>
-        <span class="item-dots"></span><span class="item-price">$110 +</span>
-      </div>
-
-      <!-- TONING TIERS -->
-      <div class="menu-item" style="flex-wrap:wrap; padding-bottom:0; border-bottom:none;">
-        <div class="tier-label">Toning · Three Tiers</div>
-      </div>
-
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Clear Gloss</span>
-          <span class="item-note">A shine-only treatment with no pigment — seals the cuticle and restores mirror-like luminosity without altering tone. A perfect standalone refresh or closing step for any colour service</span>
-        </div>
-        <span class="item-dots"></span>
-        <span class="item-price">$45 +</span>
-      </div>
-
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Toner</span>
-          <span class="item-note">A targeted tonal correction applied after lightening — neutralises brassiness or unwanted yellow and restores the precision of your intended shade. Standard after any balayage or highlight service</span>
-        </div>
-        <span class="item-dots"></span>
-        <span class="item-price">$55 +</span>
-      </div>
-
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Creative Toner</span>
-          <span class="item-note">A deliberate, specific shade request — shadow root blending, intense fashion tones, vivid pastels, or a colour melt. Requires a separate formulation, additional product, and dedicated chair time. Priced to reflect the craft involved</span>
-        </div>
-        <span class="item-dots"></span>
-        <span class="item-price">$75 +</span>
-      </div>
+    <div class="service-group">
+      <p class="service-group-title">Toning · Three Tiers</p>
+      <div class="service-item"><span class="service-name">Clear Gloss <em>A shine-only treatment — seals the cuticle and restores mirror-like luminosity without altering tone.</em></span><span class="service-price">$45 +</span></div>
+      <div class="service-item"><span class="service-name">Toner <em>Targeted tonal correction after lightening — neutralises brassiness, restores intended shade.</em></span><span class="service-price">$55 +</span></div>
+      <div class="service-item"><span class="service-name">Creative Toner <em>Shadow root blending, fashion tones, vivid pastels, or colour melt. Priced to reflect the craft involved.</em></span><span class="service-price">$75 +</span></div>
     </div>
 
-    <svg class="sep" viewBox="0 0 520 8" fill="none">
-      <path d="M10 4 C130 1,260 7,390 4 C430 3,490 5,510 4" stroke="#B8965A" stroke-width="0.6" fill="none" opacity="0.4"/>
-    </svg>
-
-    <!-- HIGHLIGHT & LIGHTENING -->
-    <div class="menu-section">
-      <div class="section-label">Highlight &amp; Lightening</div>
-
-
-      <div class="menu-item">
-        <div class="item-left"><span class="item-name">Partial Highlights</span><span class="item-note">Toner included · Specialty toner additional</span></div>
-        <span class="item-dots"></span><span class="item-price">$130 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left"><span class="item-name">Full Highlights</span><span class="item-note">Toner included · Specialty toner additional</span></div>
-        <span class="item-dots"></span><span class="item-price">$160 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Babylights</span>
-          <span class="item-note">Exceptionally fine, delicate highlights placed close to the root — mimicking the soft, multidimensional light of naturally sun-touched hair with unmatched subtlety · Toner included · Specialty toner additional</span>
-        </div>
-        <span class="item-dots"></span><span class="item-price">$165 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left"><span class="item-name">Partial Balayage</span><span class="item-note">Hand-painted; sun-kissed softness · Toner included · Specialty toner additional</span></div>
-        <span class="item-dots"></span><span class="item-price">$140 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left"><span class="item-name">Full Balayage</span><span class="item-note">Toner included · Specialty toner additional</span></div>
-        <span class="item-dots"></span><span class="item-price">$200 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Foilyage</span>
-          <span class="item-note">A hybrid of foil precision and balayage artistry — foils are used to achieve soft, graduated colour with greater lift and depth, particularly suited to darker starting points</span>
-        </div>
-        <span class="item-dots"></span><span class="item-price">$195 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Root Melt / Shadow Root</span>
-          <span class="item-note">A seamless, blurred transition from natural root to lightened ends — a lived-in, low-maintenance result that grows out beautifully. When paired with a specific shade request, see Creative Toner above</span>
-        </div>
-        <span class="item-dots"></span><span class="item-price">$65 +</span>
-      </div>
+    <div class="service-group">
+      <p class="service-group-title">Highlight &amp; Lightening</p>
+      <div class="service-item"><span class="service-name">Partial Highlights <em>Toner included · Specialty toner additional</em></span><span class="service-price">$130 +</span></div>
+      <div class="service-item"><span class="service-name">Full Highlights <em>Toner included · Specialty toner additional</em></span><span class="service-price">$160 +</span></div>
+      <div class="service-item"><span class="service-name">Babylights <em>Exceptionally fine highlights mimicking naturally sun-touched hair · Toner included</em></span><span class="service-price">$165 +</span></div>
+      <div class="service-item"><span class="service-name">Partial Balayage <em>Hand-painted; sun-kissed softness · Toner included</em></span><span class="service-price">$140 +</span></div>
+      <div class="service-item"><span class="service-name">Full Balayage <em>Toner included · Specialty toner additional</em></span><span class="service-price">$200 +</span></div>
+      <div class="service-item"><span class="service-name">Foilyage <em>Hybrid of foil precision and balayage artistry — graduated colour with greater lift and depth</em></span><span class="service-price">$195 +</span></div>
+      <div class="service-item"><span class="service-name">Root Melt / Shadow Root <em>Seamless, blurred transition — low-maintenance, grows out beautifully</em></span><span class="service-price">$65 +</span></div>
     </div>
 
-    <svg class="sep" viewBox="0 0 520 8" fill="none">
-      <path d="M10 4 C130 1,260 7,390 4 C430 3,490 5,510 4" stroke="#B8965A" stroke-width="0.6" fill="none" opacity="0.4"/>
-    </svg>
-
-    <!-- COLOUR COMBINATIONS -->
-    <div class="menu-section">
-      <div class="section-label">Colour Combinations</div>
-
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Partial Highlights &amp; Root Colour</span>
-          <span class="item-note">Two colour processes working in concert — highlights applied over a freshly retouched root, finished with a toning step that marries both into a seamless result. Toner included · Specialty toner additional · Colour pull-through or end toning additional. Approx. 3–3.5 hrs</span>
-        </div>
-        <span class="item-dots"></span><span class="item-price">$195 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Full Highlights &amp; Root Colour</span>
-          <span class="item-note">A full colour appointment — root retouch and full highlight placement processed together, unified with a toning finish. Toner included · Specialty toner additional · Colour pull-through or end toning additional. Approx. 3.5–4 hrs</span>
-        </div>
-        <span class="item-dots"></span><span class="item-price">$225 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Partial Balayage &amp; Root Colour</span>
-          <span class="item-note">Hand-painted balayage softness paired with a precise root retouch — two processes unified in a single appointment for a seamless, lived-in result. Toner included · Specialty toner additional · Colour pull-through or end toning additional. Approx. 3–3.5 hrs</span>
-        </div>
-        <span class="item-dots"></span><span class="item-price">$205 +</span>
-      </div>
-      <div class="menu-item">
-        <div class="item-left">
-          <span class="item-name">Full Balayage &amp; Root Colour</span>
-          <span class="item-note">A full balayage appointment paired with a root retouch — the most complete expression of dimensional colour, grown-in seamlessly from root to end. Toner included · Specialty toner additional · Colour pull-through or end toning additional. Approx. 3.5–4.5 hrs</span>
-        </div>
-        <span class="item-dots"></span><span class="item-price">$265 +</span>
-      </div>
+    <div class="service-group">
+      <p class="service-group-title">Colour Combinations</p>
+      <div class="service-item"><span class="service-name">Partial Highlights &amp; Root Colour <em>Approx. 3–3.5 hrs · Toner included</em></span><span class="service-price">$195 +</span></div>
+      <div class="service-item"><span class="service-name">Full Highlights &amp; Root Colour <em>Approx. 3.5–4 hrs · Toner included</em></span><span class="service-price">$225 +</span></div>
+      <div class="service-item"><span class="service-name">Partial Balayage &amp; Root Colour <em>Approx. 3–3.5 hrs · Toner included</em></span><span class="service-price">$205 +</span></div>
+      <div class="service-item"><span class="service-name">Full Balayage &amp; Root Colour <em>Approx. 3.5–4.5 hrs · Toner included</em></span><span class="service-price">$265 +</span></div>
     </div>
 
-    <svg class="sep" viewBox="0 0 520 8" fill="none">
-      <path d="M10 4 C130 1,260 7,390 4 C430 3,490 5,510 4" stroke="#B8965A" stroke-width="0.6" fill="none" opacity="0.4"/>
-    </svg>
-
-    <!-- SPECIALIST SERVICES -->
-    <div class="menu-section">
-      <div class="section-label">Specialist Services</div>
-
-      <div class="special-service">
-        <div class="special-name">Colour Correction</div>
-        <div class="special-desc">Available upon consultation only. A thorough assessment of your hair history ensures the safest, most precise approach. With 30+ years of advanced colour expertise, complex corrections are handled with care and artistry. Typical appointments run 3–5 hours depending on complexity.</div>
-        <div class="special-price">$165 per hour · In-person consultation required before booking</div>
-      </div>
-
-      <div class="special-service">
-        <div class="special-name">Bleach &amp; Tone</div>
-        <div class="special-desc">A precise lightening and toning service tailored to your hair's unique starting point. Available upon consultation only, ensuring the integrity of your hair is protected at every stage. Typical appointments run 2.5–3.5 hours depending on hair history and density.</div>
-        <div class="special-price">$150 per hour · In-person consultation required before booking</div>
-      </div>
-
-      <div class="special-service">
-        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--amber),var(--gold),var(--copper));"></div>
-        <div class="special-name">Micro Foil Enhancement</div>
-        <div class="special-desc">Precision foil placement that adds depth and brilliance. Available as an add-on to any colour service.</div>
-        <div class="special-price">Add-on service · Priced separately</div>
-      </div>
-
-      <div class="special-service">
-        <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--teal),var(--gold),var(--amber));"></div>
-        <div class="special-name">Bond-Building Treatment</div>
-        <div class="special-desc">A professional-grade bond repair treatment applied during the colour process — rebuilding broken hair bonds from within, protecting integrity, and extending the life and vibrancy of your colour. Available as an add-on to any service.</div>
-        <div class="special-price">Add-on service · $40 +</div>
-      </div>
+    <div class="service-group">
+      <p class="service-group-title">Specialist Services</p>
+      <div class="service-item"><span class="service-name">Colour Correction <em>Available upon consultation only. 3–5 hrs depending on complexity.</em></span><span class="service-price">$165 / hr</span></div>
+      <div class="service-item"><span class="service-name">Bleach &amp; Tone <em>Available upon consultation only. 2.5–3.5 hrs depending on hair history.</em></span><span class="service-price">$150 / hr</span></div>
+      <div class="service-item"><span class="service-name">Micro Foil Enhancement <em>Precision foil add-on to any colour service</em></span><span class="service-price">Add-on</span></div>
+      <div class="service-item"><span class="service-name">Bond-Building Treatment <em>Professional-grade bond repair applied during colour process</em></span><span class="service-price">$40 +</span></div>
     </div>
 
-    <div class="notation">
-      <div class="notation-title">Please Note</div>
-      <div class="notation-item">All appointments and final pricing are confirmed upon consultation. Listed prices are starting rates and may vary based on hair length, density, and condition.</div>
-      <div class="notation-item">Toning is included in all highlight and balayage services. Specialty or creative toners — including shadow root blending, fashion tones, and colour melts — are additional and priced per the Creative Toner tier. Colour pull-through or end toning on combination services is also additional and confirmed at time of appointment.</div>
-      <div class="notation-item">Micro foil services are available as an addition to any colour service and are priced separately at time of consultation.</div>
-      <div class="notation-item">Colour correction is priced at $165 per hour and requires an in-person consultation before any appointment is confirmed. Bleach &amp; Tone is priced at $150 per hour and also requires prior consultation. Results, timing, and any limitations will be discussed before any service begins.</div>
-      <div class="notation-item">A 48-hour cancellation notice is kindly requested. Late cancellations and no-shows may incur a fee of 50% of the scheduled service value.</div>
-      <div class="notation-item">Persona is an independent, by-appointment atelier. Each appointment is singular, unhurried, and entirely yours.</div>
-    </div>
-
-    <svg style="width:100%;max-width:520px;margin-top:clamp(22px,4vh,36px);" viewBox="0 0 520 52" fill="none">
-      <line x1="260" y1="6" x2="260" y2="24" stroke="#B8965A" stroke-width="0.8" opacity="0.7"/>
-      <path d="M260 18 C240 34,185 44,110 36 C72 32,32 22,10 26" stroke="#1A1410" stroke-width="1" fill="none" opacity="0.45"/>
-      <path d="M260 18 C280 34,335 44,410 36 C448 32,488 22,510 26" stroke="#1A1410" stroke-width="1" fill="none" opacity="0.45"/>
-      <rect x="257" y="24" width="6" height="6" fill="#B8965A" opacity="0.75" transform="rotate(45,260,27)"/>
-    </svg>
-
-  </div>
-</section>
-
-<!-- RESERVE -->
-<section id="reserve">
-  <div class="reserve-inner">
-    <div class="reserve-eyebrow">Your Appointment</div>
-    <div class="reserve-headline">Reserve</div>
-    <p class="reserve-subhead">
-      Each appointment is singular and entirely yours — no double-booking, no rush.
-      New clients begin with a <em>complimentary consultation</em>, in-person or by phone,
-      before any service is scheduled.
-    </p>
-    <div class="reserve-cta-wrap">
-      <a class="reserve-cta" href="https://persona.glossgenius.com" target="_blank" rel="noopener">Book Online &nbsp;·&nbsp; persona.glossgenius.com</a>
-      <a class="reserve-cta" href="tel:7073979371">Book via Phone &nbsp;·&nbsp; (707) 397-9371</a>
-    </div>
-    <div class="policy-grid">
-      <div class="policy-pillar">
-        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
-          <rect x="4" y="6" width="28" height="26" rx="3" stroke="#B8965A" stroke-width="0.8" opacity="0.6"/>
-          <line x1="4" y1="12" x2="32" y2="12" stroke="#B8965A" stroke-width="0.7" opacity="0.5"/>
-          <circle cx="13" cy="21" r="1.5" fill="#C8831A" opacity="0.7"/>
-          <circle cx="18" cy="21" r="1.5" fill="#C8831A" opacity="0.4"/>
-          <circle cx="23" cy="21" r="1.5" fill="#C8831A" opacity="0.25"/>
-        </svg>
-        <div class="policy-pillar-title">Appointments</div>
-        <div class="policy-pillar-body">Booked by appointment only through GlossGenius or by calling directly. New clients are warmly welcomed — a brief consultation ensures your time is well-spent.</div>
-      </div>
-      <div class="policy-pillar">
-        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
-          <circle cx="18" cy="18" r="13" stroke="#B8965A" stroke-width="0.8" opacity="0.55"/>
-          <line x1="18" y1="8" x2="18" y2="18" stroke="#C8831A" stroke-width="1" stroke-linecap="round"/>
-          <line x1="18" y1="18" x2="24" y2="22" stroke="#9E7438" stroke-width="0.9" stroke-linecap="round"/>
-          <circle cx="18" cy="18" r="1.8" fill="#C8831A" opacity="0.8"/>
-        </svg>
-        <div class="policy-pillar-title">Cancellations</div>
-        <div class="policy-pillar-body"><em>48 hours' notice</em> is kindly requested for any cancellations or reschedules. Late cancellations and no-shows may be subject to a fee equal to 50% of the scheduled service.</div>
-      </div>
-      <div class="policy-pillar">
-        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
-          <rect x="6" y="12" width="24" height="16" rx="2" stroke="#B8965A" stroke-width="0.8" opacity="0.55"/>
-          <path d="M6 17 L18 23 L30 17" stroke="#B8965A" stroke-width="0.7" opacity="0.5" fill="none"/>
-          <circle cx="18" cy="9" r="4" stroke="#C8831A" stroke-width="0.7" opacity="0.5"/>
-          <circle cx="18" cy="9" r="1.8" fill="#C8831A" opacity="0.6"/>
-        </svg>
-        <div class="policy-pillar-title">Deposit</div>
-        <div class="policy-pillar-body">A <em>credit card is held on file</em> at the time of booking. No charge is made unless a late cancellation or no-show policy applies. Payment in full is due at time of service.</div>
-      </div>
-      <div class="policy-pillar">
-        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
-          <path d="M10 8 L26 8 L30 14 L18 30 L6 14 Z" stroke="#B8965A" stroke-width="0.8" opacity="0.55" fill="none"/>
-          <path d="M6 14 L30 14" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/>
-          <circle cx="18" cy="14" r="2" fill="#C8831A" opacity="0.6"/>
-        </svg>
-        <div class="policy-pillar-title">Colour Consultation</div>
-        <div class="policy-pillar-body">Complimentary for all new clients. Colour corrections and bleach services require an in-person assessment before any appointment is confirmed.</div>
-      </div>
-      <div class="policy-pillar">
-        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
-          <path d="M8 10 Q8 6 12 6 L24 6 Q28 6 28 10 L28 28 Q28 32 24 32 L12 32 Q8 32 8 28 Z" stroke="#B8965A" stroke-width="0.8" opacity="0.55" fill="none"/>
-          <line x1="13" y1="13" x2="23" y2="13" stroke="#B8965A" stroke-width="0.7" opacity="0.5"/>
-          <line x1="13" y1="17" x2="23" y2="17" stroke="#B8965A" stroke-width="0.6" opacity="0.4"/>
-          <circle cx="22" cy="26" r="4" stroke="#C8831A" stroke-width="0.7" opacity="0.5" fill="none"/>
-          <path d="M20 26 L22 28 L25 24" stroke="#C8831A" stroke-width="0.7" opacity="0.7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div class="policy-pillar-title">Pricing</div>
-        <div class="policy-pillar-body">All listed prices are <em>starting rates</em>. Final pricing is confirmed at consultation and varies by hair length, density, and condition. No surprises.</div>
-      </div>
-      <div class="policy-pillar">
-        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
-          <path d="M8 28 Q6 18 12 12 Q18 6 24 10 Q30 14 26 22 Q22 30 14 30 Z" stroke="#B8965A" stroke-width="0.8" opacity="0.5" fill="none"/>
-          <circle cx="18" cy="17" r="4" stroke="#C8831A" stroke-width="0.7" opacity="0.6" fill="none"/>
-          <circle cx="18" cy="17" r="1.5" fill="#C8831A" opacity="0.7"/>
-        </svg>
-        <div class="policy-pillar-title">Referrals</div>
-        <div class="policy-pillar-body">The highest compliment is a trusted referral. Clients who send a friend receive a <em>$20 credit</em> applied to their next visit — no paperwork, just a thank-you.</div>
-      </div>
-    </div>
-
-    <div class="aftercare-block">
-      <div class="aftercare-title">Colour Aftercare · Protecting Your Investment</div>
-      <div class="aftercare-grid">
-        <div class="aftercare-item"><strong>Cool water only</strong>Hot water lifts the cuticle and fades pigment. Rinse with cool or lukewarm water to keep colour sealed and shining longer.</div>
-        <div class="aftercare-item"><strong>Wash less often</strong>Colour-treated hair retains vibrancy when washed 2–3 times per week at most. Dry shampoo is your friend between appointments.</div>
-        <div class="aftercare-item"><strong>Sulphate-free products</strong>Use a sulphate-free, colour-safe shampoo and a moisturising conditioner. Davines is recommended and available for purchase.</div>
-        <div class="aftercare-item"><strong>Heat protection</strong>Always apply a heat-protectant before blow-drying or styling. High heat is the fastest route to dull, porous colour.</div>
-        <div class="aftercare-item"><strong>Schedule your return</strong>Most colour services last 6–10 weeks. Booking before you leave ensures you keep the look that was crafted for you.</div>
-        <div class="aftercare-item"><strong>Questions? Leave a message</strong>Any concerns in the days after your appointment are welcome. Simply call <em style="font-style:normal;color:var(--copper);">(707) 397-9371</em>, leave a message, and I will return your call as soon as possible.</div>
-      </div>
+    <div class="services-note">
+      <p>All appointments and final pricing are confirmed upon consultation. Listed prices are starting rates and may vary based on hair length, density, and condition.</p>
+      <p>Toning is included in all highlight and balayage services. Specialty or creative toners are additional. Colour correction requires an in-person consultation before any appointment is confirmed.</p>
+      <p>A 48-hour cancellation notice is kindly requested. Late cancellations and no-shows may incur a fee of 50% of the scheduled service value.</p>
+      <p>Persona is an independent, by-appointment atelier. Each appointment is singular, unhurried, and entirely yours.</p>
     </div>
   </div>
-</section>
+</div>
+
+<!-- BOOKING -->
+<div id="booking" class="whorl-bg">
+  <div class="section-wrap" style="text-align:center;">
+    <p class="section-label">Your Appointment</p>
+    <h2 class="section-title">Reserve</h2>
+    <svg width="110" height="20" viewBox="0 0 110 20" fill="none" style="display:block;margin:0 auto 1.5rem;">
+      <line x1="0" y1="10" x2="14" y2="10" stroke="#7a98aa" stroke-width="1"/>
+      <line x1="96" y1="10" x2="110" y2="10" stroke="#7a98aa" stroke-width="1"/>
+      <circle cx="12" cy="10" r="3.5" fill="#4a6270"/>
+      <circle cx="98" cy="10" r="3.5" fill="#4a6270"/>
+      <rect x="18" y="2" width="74" height="16" rx="8" stroke="#aabfcc" stroke-width="1"/>
+      <circle cx="55" cy="10" r="3.5" fill="#af8430"/>
+      <circle cx="55" cy="10" r="1.5" fill="#e8d090"/>
+      <path d="M 63 4 Q 70 10 63 16" stroke="#d68870" stroke-width=".9" fill="none" opacity=".7"/>
+    </svg>
+    <p>Each appointment is singular and entirely yours — no double-booking, no rush.<br>New clients begin with a <em>complimentary consultation</em>, in-person or by phone.</p>
+    <div class="booking-ctas">
+      <a href="https://persona.glossgenius.com" class="btn btn-primary">Book Online &nbsp;·&nbsp; persona.glossgenius.com</a>
+      <a href="tel:7073979371" class="btn">Call &nbsp;·&nbsp; (707) 397-9371</a>
+    </div>
+    <div class="booking-grid">
+      <div class="policy-card"><h4>Appointments</h4><p>Booked through GlossGenius or by calling directly. New clients are warmly welcomed — a brief consultation ensures your time is well-spent.</p></div>
+      <div class="policy-card"><h4>Cancellations</h4><p><em>48 hours' notice</em> is kindly requested. Late cancellations and no-shows may be subject to a fee of 50% of the scheduled service.</p></div>
+      <div class="policy-card"><h4>Deposit</h4><p>A <em>credit card is held on file</em> at booking. No charge unless a cancellation policy applies. Payment in full is due at time of service.</p></div>
+      <div class="policy-card"><h4>Colour Consultation</h4><p>Complimentary for all new clients. Colour corrections and bleach services require an in-person assessment before any appointment is confirmed.</p></div>
+      <div class="policy-card"><h4>Pricing</h4><p>All listed prices are <em>starting rates</em>. Final pricing confirmed at consultation and varies by length, density, and condition. No surprises.</p></div>
+      <div class="policy-card"><h4>Referrals</h4><p>Clients who send a friend receive a <em>$20 credit</em> applied to their next visit — no paperwork, just a thank-you.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- AFTERCARE -->
+<div id="aftercare" class="whorl-bg">
+  <div class="section-wrap">
+    <p class="section-label">Colour Aftercare</p>
+    <h2 class="section-title">Protecting Your Investment</h2>
+    <div class="aftercare-grid">
+      <div class="aftercare-item"><h4>Cool water only</h4><p>Hot water lifts the cuticle and fades pigment. Rinse with cool or lukewarm water to keep colour sealed and shining longer.</p></div>
+      <div class="aftercare-item"><h4>Wash less often</h4><p>Colour-treated hair retains vibrancy when washed 2–3 times per week at most. Dry shampoo is your friend between appointments.</p></div>
+      <div class="aftercare-item"><h4>Sulphate-free products</h4><p>Use a sulphate-free, colour-safe shampoo and a moisturising conditioner. Davines is recommended and available for purchase.</p></div>
+      <div class="aftercare-item"><h4>Heat protection</h4><p>Always apply a heat-protectant before blow-drying or styling. High heat is the fastest route to dull, porous colour.</p></div>
+      <div class="aftercare-item"><h4>Schedule your return</h4><p>Most colour services last 6–10 weeks. Booking before you leave ensures you keep the look that was crafted for you.</p></div>
+      <div class="aftercare-item"><h4>Questions? Leave a message</h4><p>Any concerns in the days after your appointment are welcome. Call <a href="tel:7073979371" style="color:var(--amber-dim);">(707) 397-9371</a> and I will return your call as soon as possible.</p></div>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
-<footer id="footer">
-  <div class="footer-script">Persona</div>
-  <div class="footer-swatches">
-    <div class="footer-swatch" style="background:var(--rose);"></div>
-    <div class="footer-swatch" style="background:var(--violet);"></div>
-    <div class="footer-swatch" style="background:var(--teal);"></div>
-    <div class="footer-swatch" style="background:var(--amber);"></div>
-    <div class="footer-swatch" style="background:var(--gold-light);"></div>
-    <div class="footer-swatch" style="background:var(--copper);"></div>
+<footer>
+  <div class="whorl-f"></div>
+  <svg width="220" height="42" viewBox="0 0 220 42" fill="none" style="display:block;margin:0 auto 2rem;position:relative;z-index:1;">
+    <line x1="0" y1="21" x2="28" y2="21" stroke="#4a6270" stroke-width="1.2"/>
+    <line x1="192" y1="21" x2="220" y2="21" stroke="#4a6270" stroke-width="1.2"/>
+    <circle cx="25" cy="21" r="5.5" fill="#4a6270"/>
+    <circle cx="195" cy="21" r="5.5" fill="#4a6270"/>
+    <rect x="34" y="5" width="152" height="32" rx="16" stroke="rgba(122,152,170,0.4)" stroke-width="1"/>
+    <rect x="43" y="11" width="134" height="20" rx="10" stroke="rgba(122,152,170,0.6)" stroke-width="1.2"/>
+    <g transform="translate(110,21)">
+      <line x1="0" y1="-7" x2="0" y2="-14" stroke="#af8430" stroke-width="1.1"/>
+      <line x1="0" y1="7" x2="0" y2="14" stroke="#af8430" stroke-width="1.1"/>
+      <line x1="-7" y1="0" x2="-15" y2="0" stroke="#af8430" stroke-width="1.1"/>
+      <line x1="7" y1="0" x2="15" y2="0" stroke="#af8430" stroke-width="1.1"/>
+      <line x1="-5" y1="-5" x2="-10" y2="-10" stroke="#c8a558" stroke-width=".9" opacity=".7"/>
+      <line x1="5" y1="-5" x2="10" y2="-10" stroke="#c8a558" stroke-width=".9" opacity=".7"/>
+      <line x1="-5" y1="5" x2="-10" y2="10" stroke="#c8a558" stroke-width=".9" opacity=".7"/>
+      <line x1="5" y1="5" x2="10" y2="10" stroke="#c8a558" stroke-width=".9" opacity=".7"/>
+      <circle cx="0" cy="0" r="4.5" fill="#af8430"/><circle cx="0" cy="0" r="2" fill="#e8d090"/>
+    </g>
+    <path d="M 124 12 Q 134 21 124 30" stroke="#d68870" stroke-width="1" fill="none" opacity=".7"/>
+    <path d="M 131 8 Q 144 21 131 34" stroke="#d68870" stroke-width=".7" fill="none" opacity=".4"/>
+    <polygon points="110,5 113,8 110,11 107,8" fill="#9b7228" opacity=".6"/>
+    <polygon points="110,31 113,34 110,37 107,34" fill="#9b7228" opacity=".6"/>
+  </svg>
+  <span class="footer-logo">Persona</span>
+  <p class="footer-sub">Hair Colour Atelier</p>
+  <div class="footer-details">
+    <p>Fort Bragg, California &nbsp;·&nbsp; By Appointment</p>
+    <p>350 S Franklin Street, Suite B</p>
+    <p><a href="tel:7073979371">(707) 397-9371</a></p>
+    <p><a href="https://persona.glossgenius.com">persona.glossgenius.com</a></p>
   </div>
-  <div class="footer-address">Fort Bragg, California · By Appointment</div>
-  <div class="footer-address" style="font-style:normal; letter-spacing:0.08em; opacity:0.85;">350 S Franklin Street, Suite B</div>
-  <div class="footer-address" style="font-style:normal; letter-spacing:0.08em; opacity:0.85;">(707) 397-9371</div>
-  <div class="footer-davines">
-    We use &amp; recommend
-    <span class="davines-wordmark">DAVINES</span>
-    Professional Products
-  </div>
-  <div class="footer-tag">Bespoke colour · 30+ years of craft · Mendocino Coast</div>
+  <p class="footer-davines">We use &amp; recommend &nbsp;<strong>DAVINES</strong>&nbsp; Professional Products</p>
+  <p class="footer-end">Bespoke colour &nbsp;·&nbsp; 30+ years of craft &nbsp;·&nbsp; Mendocino Coast</p>
 </footer>
 
 <script>
-  const canvas = document.getElementById('texture');
-  const ctx = canvas.getContext('2d');
-  const grit = document.createElement('canvas');
-  grit.id = 'grit';
-  grit.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.35;mix-blend-mode:overlay;';
-  document.body.insertBefore(grit, document.body.firstChild);
-  const gctx = grit.getContext('2d');
+(function() {
+  // ── BAKED TEXTURE: offscreen canvas → data URL → body background-image
+  // This approach works reliably on iOS Safari — no fixed canvas, no blend mode issues.
+  // We paint once at load and tile it as a CSS background.
 
-  function resize() {
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    grit.width = window.innerWidth; grit.height = window.innerHeight;
-    paintConcrete(); paintGrit();
+  var SIZE = 320; // tile size — small enough to be fast, large enough to look random
+  var off = document.createElement('canvas');
+  off.width = SIZE; off.height = SIZE;
+  var ctx = off.getContext('2d');
+
+  // 1. Base radial vignette — warm centre to deeper edge
+  var base = ctx.createRadialGradient(SIZE*0.44, SIZE*0.40, 0, SIZE*0.5, SIZE*0.5, SIZE*0.75);
+  base.addColorStop(0,   'rgba(237,229,216,0.0)');
+  base.addColorStop(0.5, 'rgba(200,188,168,0.10)');
+  base.addColorStop(1,   'rgba(140,125,100,0.32)');
+  ctx.fillStyle = base;
+  ctx.fillRect(0, 0, SIZE, SIZE);
+
+  // 2. Warm noise pixels — tinted amber/steel, variable alpha
+  var img = ctx.createImageData(SIZE, SIZE);
+  var d = img.data;
+  for (var i = 0; i < d.length; i += 4) {
+    var v = (Math.random() * 255) | 0;
+    var warm = Math.random() > 0.68 ? 14 : 0;
+    var cool = Math.random() > 0.84 ? 9  : 0;
+    d[i]   = Math.min(255, v + warm);
+    d[i+1] = Math.min(255, v + (warm >> 2));
+    d[i+2] = Math.min(255, v + cool);
+    d[i+3] = 16 + ((Math.random() * 18) | 0);
+  }
+  ctx.putImageData(img, 0, 0);
+
+  // 3. Fingerprint shadow pools — the leaf-shadow komorebi effect
+  for (var e = 0; e < 7; e++) {
+    var ex = Math.random() * SIZE;
+    var ey = Math.random() * SIZE;
+    var er = 28 + Math.random() * 90;
+    var ep = ctx.createRadialGradient(ex, ey, 0, ex, ey, er);
+    if (Math.random() > 0.45) {
+      ep.addColorStop(0, 'rgba(28,18,8,0.10)');
+      ep.addColorStop(1, 'rgba(28,18,8,0)');
+    } else {
+      ep.addColorStop(0, 'rgba(12,22,32,0.08)');
+      ep.addColorStop(1, 'rgba(12,22,32,0)');
+    }
+    ctx.fillStyle = ep;
+    ctx.beginPath();
+    ctx.ellipse(
+      ex, ey,
+      er * (0.5 + Math.random() * 0.9),
+      er * (0.35 + Math.random() * 0.65),
+      Math.random() * Math.PI, 0, Math.PI * 2
+    );
+    ctx.fill();
   }
 
-  function paintConcrete() {
-    const w = canvas.width, h = canvas.height;
-    ctx.clearRect(0,0,w,h);
-    const base = ctx.createRadialGradient(w*0.42, h*0.38, 0, w*0.5, h*0.5, w*0.85);
-    base.addColorStop(0, 'rgba(210,200,185,0.0)');
-    base.addColorStop(0.5, 'rgba(180,170,155,0.15)');
-    base.addColorStop(1, 'rgba(120,110,95,0.45)');
-    ctx.fillStyle = base; ctx.fillRect(0,0,w,h);
-    const img = ctx.createImageData(w, h); const d = img.data;
-    for (let i = 0; i < d.length; i += 4) {
-      const v = (Math.random() * 255) | 0;
-      const warm = Math.random() > 0.7 ? 12 : 0;
-      d[i] = v + warm; d[i+1] = v + (warm >> 1); d[i+2] = v;
-      d[i+3] = 22 + (Math.random() * 14 | 0);
-    }
-    ctx.putImageData(img, 0, 0);
-    for (let e = 0; e < 6; e++) {
-      const ex = Math.random()*w, ey = Math.random()*h, er = 40 + Math.random()*120;
-      const ep = ctx.createRadialGradient(ex, ey, 0, ex, ey, er);
-      ep.addColorStop(0, 'rgba(30,22,14,0.08)'); ep.addColorStop(1, 'rgba(30,22,14,0)');
-      ctx.fillStyle = ep; ctx.beginPath();
-      ctx.ellipse(ex, ey, er*(0.6+Math.random()*0.8), er*(0.4+Math.random()*0.6), Math.random()*Math.PI, 0, Math.PI*2);
-      ctx.fill();
-    }
+  // 4. Amber bloom patches — warm light pools between shadows
+  for (var b = 0; b < 3; b++) {
+    var bx = Math.random() * SIZE;
+    var by = Math.random() * SIZE * 0.65;
+    var br = 40 + Math.random() * 80;
+    var bp = ctx.createRadialGradient(bx, by, 0, bx, by, br);
+    bp.addColorStop(0, 'rgba(195,165,88,0.07)');
+    bp.addColorStop(1, 'rgba(195,165,88,0)');
+    ctx.fillStyle = bp;
+    ctx.beginPath();
+    ctx.ellipse(bx, by, br*(0.7+Math.random()*0.5), br*(0.5+Math.random()*0.5), Math.random()*Math.PI, 0, Math.PI*2);
+    ctx.fill();
   }
 
-  function paintGrit() {
-    const w = grit.width, h = grit.height;
-    gctx.clearRect(0,0,w,h);
-    const img2 = gctx.createImageData(w, h); const d2 = img2.data;
-    for (let i = 0; i < d2.length; i += 4) {
-      if (Math.random() > 0.18) { d2[i+3] = 0; continue; }
-      const v = Math.random() > 0.5 ? 240 : 10;
-      d2[i] = d2[i+1] = d2[i+2] = v; d2[i+3] = 8 + (Math.random()*18 | 0);
-    }
-    gctx.putImageData(img2, 0, 0);
+  // 5. Fine grit — second pass with scattered light/dark specks
+  var img2 = ctx.createImageData(SIZE, SIZE);
+  var d2 = img2.data;
+  for (var j = 0; j < d2.length; j += 4) {
+    if (Math.random() > 0.14) { d2[j+3] = 0; continue; }
+    var gv = Math.random() > 0.5 ? 230 : 15;
+    d2[j] = d2[j+1] = d2[j+2] = gv;
+    d2[j+3] = 5 + ((Math.random() * 14) | 0);
   }
+  // Paint grit at reduced alpha using globalAlpha
+  var gritOff = document.createElement('canvas');
+  gritOff.width = SIZE; gritOff.height = SIZE;
+  var gctx = gritOff.getContext('2d');
+  gctx.putImageData(img2, 0, 0);
+  ctx.globalAlpha = 0.55;
+  ctx.drawImage(gritOff, 0, 0);
+  ctx.globalAlpha = 1.0;
 
-  resize();
-  window.addEventListener('resize', resize);
+  // 6. Bake to data URL and apply as body background
+  var dataURL = off.toDataURL('image/png');
+  document.body.style.backgroundImage = 'url(' + dataURL + ')';
+  document.body.style.backgroundRepeat = 'repeat';
+  document.body.style.backgroundSize = SIZE + 'px ' + SIZE + 'px';
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+  // ── SCROLL REVEAL — IntersectionObserver, works on iOS ────────────
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.08 });
+
+    var targets = document.querySelectorAll(
+      '#artisan .section-wrap > *, #light .section-wrap > *, ' +
+      '#textile .section-wrap > *, #services .service-group, ' +
+      '#services .services-note, #booking .section-wrap > *, ' +
+      '#aftercare .aftercare-item'
+    );
+    targets.forEach(function(el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.75s ease, transform 0.75s ease';
+      observer.observe(el);
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll('#bio .bio-inner > *, #light .light-inner > *, #textile .textile-inner > *, #menu .menu-section, #menu .notation, #menu .menu-header, #reserve .reserve-inner > *').forEach(el => {
-    el.style.opacity = '0'; el.style.transform = 'translateY(18px)';
-    el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    observer.observe(el);
-  });
+  }
+})();
 </script>
 </body>
 </html>
