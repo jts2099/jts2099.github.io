@@ -566,6 +566,17 @@
       line-height: 1.75; margin-bottom: clamp(28px,5vh,44px);
     }
     .reserve-subhead em { color: var(--copper); font-style: normal; }
+    .reserve-hours {
+      font-family: 'Jost', sans-serif; font-weight: 200;
+      font-size: clamp(9px,1.6vw,11px); letter-spacing: 0.42em; text-transform: uppercase;
+      color: var(--gold-dim); text-align: center;
+      margin-bottom: clamp(20px,3.5vh,32px);
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+    }
+    .reserve-hours::before, .reserve-hours::after {
+      content: ''; width: 22px; height: 1px;
+      background: rgba(154,148,88,0.4);
+    }
     .reserve-cta-wrap {
       display: flex; flex-direction: column; align-items: center;
       gap: clamp(12px,2vh,18px); margin-bottom: clamp(36px,6vh,56px);
@@ -647,6 +658,22 @@
     .footer-tag { font-family: 'Jost', sans-serif; font-weight: 200; font-size: clamp(8px,1.4vw,10px); letter-spacing: 0.48em; text-transform: uppercase; color: rgba(236,238,232,0.4); margin-top: 6px; }
     .footer-davines { font-family: 'Jost', sans-serif; font-weight: 200; font-size: clamp(9px,1.8vw,11px); letter-spacing: 0.2em; color: rgba(236,238,232,0.52); display: flex; align-items: center; justify-content: center; gap: 0.55em; flex-wrap: wrap; }
     .davines-wordmark { font-family: 'Josefin Sans', sans-serif; font-weight: 100; font-size: clamp(11px,2.2vw,14px); letter-spacing: 0.4em; color: rgba(184,176,112,0.78); text-transform: uppercase; }
+    .footer-instagram {
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: clamp(11px,2vw,13px); letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+    .footer-instagram a {
+      color: rgba(184,176,112,0.85); text-decoration: none;
+      border-bottom: 1px dotted rgba(184,176,112,0.4);
+      transition: opacity 0.25s ease;
+    }
+    .footer-instagram a:hover { opacity: 0.7; }
+    .footer-hours {
+      font-family: 'Jost', sans-serif; font-weight: 200;
+      font-size: clamp(10px,1.8vw,12px); letter-spacing: 0.18em;
+      color: rgba(236,238,232,0.58);
+    }
 
     #cover { background-image: radial-gradient(ellipse at 30% 20%, rgba(155,138,174,0.07) 0%, transparent 55%), radial-gradient(ellipse at 75% 80%, rgba(122,187,224,0.06) 0%, transparent 50%); }
     #light { background-image: radial-gradient(ellipse at 60% 40%, rgba(154,148,88,0.06) 0%, transparent 50%), repeating-linear-gradient(180deg, transparent, transparent 60px, rgba(0,0,0,0.025) 60px, rgba(0,0,0,0.025) 61px) !important; }
@@ -1201,6 +1228,7 @@
   <div class="reserve-inner">
     <div class="reserve-eyebrow">Your Appointment</div>
     <div class="reserve-headline">Reserve</div>
+    <div class="reserve-hours">Tuesday &ndash; Saturday &nbsp;·&nbsp; 2:00 &ndash; 7:00 PM</div>
     <p class="reserve-subhead">
       Each appointment is singular and entirely yours — no double-booking, no rush.
       New clients begin with a <em>complimentary consultation</em>, in-person or by phone,
@@ -1301,7 +1329,9 @@
   <div class="footer-address">Fort Bragg, California · By Appointment</div>
   <div class="footer-address" style="font-style:normal; letter-spacing:0.08em; opacity:0.85;">350 S Franklin Street, Suite B</div>
   <div class="footer-address" style="font-style:italic; letter-spacing:0.04em; opacity:0.7; font-size:clamp(11px,1.8vw,12.5px);">Located within Mendo Glow Tanning and Salon &nbsp;·&nbsp; Entrance on the right side of the building</div>
-  <div class="footer-address" style="font-style:normal; letter-spacing:0.08em; opacity:0.85;">(707) 370-7720</div>
+  <div class="footer-hours">Tuesday &ndash; Saturday &nbsp;·&nbsp; 2:00 &ndash; 7:00 PM</div>
+  <div class="footer-address" style="font-style:normal; letter-spacing:0.08em; color:rgba(236,238,232,0.82);">(707) 370-7720</div>
+  <div class="footer-instagram"><a href="https://www.instagram.com/personahaircolor" target="_blank" rel="noopener">@personahaircolor</a></div>
   <div class="footer-davines">
     We use &amp; recommend
     <span class="davines-wordmark">DAVINES</span>
