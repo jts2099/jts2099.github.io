@@ -838,6 +838,52 @@
     }
     /* ─────────────────────────────────────────────────────────────── */
 
+    /* ── Sustainability notice ─────────────────────────────────── */
+    .sustain-block {
+      margin-top: clamp(14px,3vh,24px);
+      padding: clamp(16px,2.8vw,24px) clamp(18px,3.5vw,28px);
+      border: 1px solid rgba(74,94,114,0.14);
+      background: rgba(216,218,210,0.18);
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(14px,2.5vw,22px);
+    }
+    .sustain-block::before,.sustain-block::after {
+      content:''; position:absolute;
+      width:8px; height:8px;
+      border-color: var(--gold-dim); border-style: solid; opacity: 0.38;
+    }
+    .sustain-block::before { top:-1px; left:-1px; border-width:1px 0 0 1px; }
+    .sustain-block::after  { bottom:-1px; right:-1px; border-width:0 1px 1px 0; }
+    .sustain-icon {
+      flex-shrink: 0;
+      width: clamp(28px,4vw,36px);
+      height: clamp(28px,4vw,36px);
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+    .sustain-text { flex: 1; }
+    .sustain-label {
+      font-family: 'Jost', sans-serif; font-weight: 200;
+      font-size: clamp(8px,1.4vw,10px); letter-spacing: 0.45em;
+      text-transform: uppercase; color: var(--gold-dim);
+      margin-bottom: 6px;
+    }
+    .sustain-body {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: clamp(12px,2vw,13.5px); color: var(--ink-mid);
+      line-height: 1.72;
+    }
+    .sustain-body a {
+      color: var(--copper); font-style: normal;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(110,90,60,0.4);
+      transition: opacity 0.25s ease;
+    }
+    .sustain-body a:hover { opacity: 0.7; }
+    /* ─────────────────────────────────────────────────────────── */
+
     @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
   </style>
 </head>
@@ -1398,6 +1444,26 @@
            target="_blank" rel="noopener">
           Scan or tap to browse &nbsp;·&nbsp; Persona's Shop
         </a>
+      </div>
+    </div>
+
+    <div class="sustain-block">
+      <svg class="sustain-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Circular arrow / cycle — recycling motif -->
+        <path d="M18 6 C11.4 6 6 11.4 6 18 C6 24.6 11.4 30 18 30 C24.6 30 30 24.6 30 18" stroke="#6E6A3C" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        <path d="M26 10 L30 18 L22 18" stroke="#6E6A3C" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="18" cy="18" r="3.5" fill="#6E6A3C" opacity="0.6"/>
+        <!-- Leaf element -->
+        <path d="M18 18 C18 14, 22 11, 25 12 C24 15, 21 18, 18 18Z" fill="#7ABBE0" opacity="0.55"/>
+      </svg>
+      <div class="sustain-text">
+        <div class="sustain-label">Our Commitment &nbsp;·&nbsp; Sustainability</div>
+        <div class="sustain-body">
+          Persona is a proud participant in <a href="https://www.ridwell.com" target="_blank" rel="noopener">Ridwell</a>'s
+          plastics recycling program — because the beauty industry produces waste, and we intend to
+          take responsibility for ours. Plastic bottles are recycled locally, while all other plastics —
+          including film, bottle tops, and shipping materials — are collected and diverted from landfill through Ridwell's service.
+        </div>
       </div>
     </div>
 
