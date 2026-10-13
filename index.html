@@ -22,11 +22,11 @@
       --cream:      #D8DAD2;
       --ink:        #1E2830;
       --ink-warm:   #232C36;
-      --ink-mid:    #3A3028;
+      --ink-mid:    #4A5E72;
       --gold:       #9A9458;
       --gold-light: #B8B070;
       --gold-dim:   #6E6A3C;
-      --copper:     #6E5A3C;
+      --copper:     #736860;
       --rose:       #9B8AAE;
       --violet:     #7A6E98;
       --teal:       #7ABBE0;
@@ -39,7 +39,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      background: #D2D4CC;
+      background: #ECEEE8;
       font-family: 'Jost', sans-serif;
       color: var(--ink);
       overflow-x: hidden;
@@ -49,14 +49,14 @@
       position: fixed; inset: 0;
       width: 100%; height: 100%;
       pointer-events: none; z-index: 0;
-      opacity: 0.55; mix-blend-mode: multiply;
+      opacity: 0.22; mix-blend-mode: multiply;
     }
 
     canvas#grit {
       position: fixed; inset: 0;
       width: 100%; height: 100%;
       pointer-events: none; z-index: 0;
-      opacity: 0.18; mix-blend-mode: overlay;
+      opacity: 0.08; mix-blend-mode: overlay;
     }
 
     .bleeds {
@@ -604,7 +604,7 @@
     }
     .reserve-phone-note a {
       color: var(--copper); text-decoration: none; font-style: normal;
-      border-bottom: 1px dotted rgba(110,90,60,0.4);
+      border-bottom: 1px dotted rgba(115,104,96,0.4);
       transition: opacity 0.25s ease;
     }
     .reserve-phone-note a:hover { opacity: 0.7; }
@@ -878,7 +878,7 @@
     .sustain-body a {
       color: var(--copper); font-style: normal;
       text-decoration: none;
-      border-bottom: 1px dotted rgba(110,90,60,0.4);
+      border-bottom: 1px dotted rgba(115,104,96,0.4);
       transition: opacity 0.25s ease;
     }
     .sustain-body a:hover { opacity: 0.7; }
@@ -1095,10 +1095,10 @@
       <circle cx="100" cy="90" r="22" stroke="#9A9458" stroke-width="0.8" opacity="0.35"/>
       <circle cx="100" cy="90" r="14" stroke="#9A9458" stroke-width="0.7" opacity="0.5" fill="rgba(154,148,88,0.08)"/>
       <circle cx="100" cy="90" r="7" fill="#9A9458" opacity="0.7"/>
-      <circle cx="380" cy="90" r="14" stroke="#2C3845" stroke-width="0.8" opacity="0.4" fill="none"/>
-      <circle cx="380" cy="90" r="7" fill="#2C3845" opacity="0.35"/>
-      <line x1="20" y1="90" x2="86" y2="90" stroke="#2C3845" stroke-width="1.2" opacity="0.5"/>
-      <line x1="394" y1="90" x2="460" y2="90" stroke="#2C3845" stroke-width="1.2" opacity="0.5"/>
+      <circle cx="380" cy="90" r="14" stroke="#4A5E72" stroke-width="0.8" opacity="0.4" fill="none"/>
+      <circle cx="380" cy="90" r="7" fill="#4A5E72" opacity="0.35"/>
+      <line x1="20" y1="90" x2="86" y2="90" stroke="#4A5E72" stroke-width="1.2" opacity="0.5"/>
+      <line x1="394" y1="90" x2="460" y2="90" stroke="#4A5E72" stroke-width="1.2" opacity="0.5"/>
       <path d="M114 90 C180 50,260 44,366 80" stroke="#9A9458" stroke-width="0.9" opacity="0.7"/>
       <path d="M114 90 C180 90,280 90,366 90" stroke="#9A9458" stroke-width="0.6" opacity="0.4" stroke-dasharray="3 4"/>
       <path d="M114 90 C180 130,260 136,366 100" stroke="#9A9458" stroke-width="0.9" opacity="0.7"/>
@@ -1132,7 +1132,7 @@
       <div class="light-tile">
         <svg class="light-tile-icon" viewBox="0 0 48 48" fill="none">
           <circle cx="10" cy="24" r="5" fill="#9A9458" opacity="0.7"/>
-          <circle cx="38" cy="24" r="5" stroke="#2C3845" stroke-width="0.8" opacity="0.45" fill="none"/>
+          <circle cx="38" cy="24" r="5" stroke="#4A5E72" stroke-width="0.8" opacity="0.45" fill="none"/>
           <path d="M15 24 C22 14,30 14,33 20" stroke="#9A9458" stroke-width="0.8" opacity="0.7"/>
           <path d="M15 24 C22 24,30 24,33 24" stroke="#9A9458" stroke-width="0.6" opacity="0.4"/>
           <path d="M15 24 C22 34,30 34,33 28" stroke="#9A9458" stroke-width="0.8" opacity="0.7"/>
@@ -1449,6 +1449,34 @@
       </div>
       <div class="policy-pillar">
         <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M12 6 L12 22 Q12 30 18 30 Q24 30 24 22 L24 6 Z" stroke="#9A9458" stroke-width="0.8" opacity="0.55" fill="none"/>
+          <path d="M12 16 L24 16" stroke="#9A9458" stroke-width="0.6" opacity="0.4"/>
+          <circle cx="18" cy="23" r="2" fill="#9A9458" opacity="0.6"/>
+        </svg>
+        <div class="policy-pillar-title">A Colourist's Practice</div>
+        <div class="policy-pillar-body">Persona is a <em>colour studio</em>. I trained in the departmentalized model, where the colourist handles colour and a stylist handles cut and styling. I don't offer haircuts, but I'm happy to work alongside your stylist and your existing style. Bring a recent cut, or book one with a stylist you trust before or after your colour visit. I also keep a small roster of stylists I can refer you to.</div>
+      </div>
+      <div class="policy-pillar">
+        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M8 26 Q10 10 18 10 Q26 10 28 26" stroke="#9A9458" stroke-width="0.8" opacity="0.55" fill="none"/>
+          <path d="M12 26 Q13 16 18 16 Q23 16 24 26" stroke="#9A9458" stroke-width="0.7" opacity="0.45" fill="none"/>
+          <line x1="6" y1="28" x2="30" y2="28" stroke="#9A9458" stroke-width="0.7" opacity="0.5" stroke-linecap="round"/>
+        </svg>
+        <div class="policy-pillar-title">Your Finish</div>
+        <div class="policy-pillar-body">Your hair is always finished before you leave. Every colour service includes a simple <em>finish blowout</em> with brush and dryer, so we can see the colour dry and you leave presentable. A style-out, which involves heat tools such as curling or flat irons and more time, is not included, and standalone blowouts aren't available at this time.</div>
+      </div>
+      <div class="policy-pillar">
+        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
+          <path d="M6 24 Q12 10 18 18 Q24 26 30 12" stroke="#9A9458" stroke-width="0.8" opacity="0.55" fill="none" stroke-linecap="round"/>
+          <circle cx="6" cy="24" r="1.6" fill="#9A9458" opacity="0.5"/>
+          <circle cx="18" cy="18" r="1.8" fill="#9A9458" opacity="0.7"/>
+          <circle cx="30" cy="12" r="1.6" fill="#9A9458" opacity="0.5"/>
+        </svg>
+        <div class="policy-pillar-title">Your Colour Plan</div>
+        <div class="policy-pillar-body">Most colour begins with a <em>foundation visit or two</em>, where I build your look and establish its signature. After that, many clients alternate between a lighter maintenance visit and a fuller service. We map out your plan at your consultation so you know what to expect before you book.</div>
+      </div>
+      <div class="policy-pillar">
+        <svg class="policy-pillar-icon" viewBox="0 0 36 36" fill="none">
           <path d="M8 10 Q8 6 12 6 L24 6 Q28 6 28 10 L28 28 Q28 32 24 32 L12 32 Q8 32 8 28 Z" stroke="#9A9458" stroke-width="0.8" opacity="0.55" fill="none"/>
           <line x1="13" y1="13" x2="23" y2="13" stroke="#9A9458" stroke-width="0.7" opacity="0.5"/>
           <line x1="13" y1="17" x2="23" y2="17" stroke="#9A9458" stroke-width="0.6" opacity="0.4"/>
@@ -1570,7 +1598,7 @@
   const ctx = canvas.getContext('2d');
   const grit = document.createElement('canvas');
   grit.id = 'grit';
-  grit.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.18;mix-blend-mode:overlay;';
+  grit.style.cssText = 'position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.08;mix-blend-mode:overlay;';
   document.body.insertBefore(grit, document.body.firstChild);
   const gctx = grit.getContext('2d');
 
@@ -1584,9 +1612,9 @@
     const w = canvas.width, h = canvas.height;
     ctx.clearRect(0,0,w,h);
     const base = ctx.createRadialGradient(w*0.42, h*0.38, 0, w*0.5, h*0.5, w*0.85);
-    base.addColorStop(0, 'rgba(200,202,196,0.0)');
-    base.addColorStop(0.5, 'rgba(170,174,168,0.10)');
-    base.addColorStop(1, 'rgba(100,108,118,0.32)');
+    base.addColorStop(0, 'rgba(236,238,232,0.0)');
+    base.addColorStop(0.5, 'rgba(236,238,232,0.0)');
+    base.addColorStop(1, 'rgba(74,94,114,0.07)');
     ctx.fillStyle = base; ctx.fillRect(0,0,w,h);
     const img = ctx.createImageData(w, h); const d = img.data;
     for (let i = 0; i < d.length; i += 4) {
